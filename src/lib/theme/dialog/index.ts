@@ -39,18 +39,18 @@ export const colorScheme: DialogTokenSections.ColorScheme = {
 
 export const css: DialogTokenSections.CSS = `
 .p-dialog-header {
-    background: var(--p-primary-hover-color);
-    color: var(--p-primary-color);
+    background: #D7E3FB;
+    color: #112A46;
 }
 .p-dialog-title {
-    color: var(--p-primary-color);
+    color: #112A46;
 }
 .p-dialog-header-icon {
-    color: var(--p-primary-color);
+    color: #112A46;
 }
 .p-dialog-header-icon:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--p-primary-color);
+    background: #B4D3FD;
+    color: #112A46;
 }
 `;
 
