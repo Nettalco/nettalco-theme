@@ -1,10 +1,10 @@
 {
-  "name": "@analistas-sistemas/nettalco-theme",
-  "version": "0.1.22",
+  "name": "@nettalco/nettalco-theme",
+  "version": "1.0.3",
   "description": "Nettalco custom PrimeNG theme and components",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Analistas-sistemas/nettalco-theme.git"
+    "url": "git+https://github.com/Nettalco/nettalco-theme.git"
   },
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
