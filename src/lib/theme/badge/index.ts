@@ -1,0 +1,72 @@
+import type { BadgeDesignTokens, BadgeTokenSections } from '@primeuix/themes/types/badge';
+
+export const root: BadgeTokenSections.Root = {
+    borderRadius: '{border.radius.md}',
+    padding: '0 0.5rem',
+    fontSize: '0.75rem',
+    fontWeight: '700',
+    minWidth: '1.5rem',
+    height: '1.5rem'
+};
+export const dot: BadgeTokenSections.Dot = {
+    size: '0.5rem'
+};
+export const sm: BadgeTokenSections.Sm = {
+    fontSize: '0.625rem',
+    minWidth: '1.25rem',
+    height: '1.25rem'
+};
+
+export const lg: BadgeTokenSections.Lg = {
+    fontSize: '0.875rem',
+    minWidth: '1.75rem',
+    height: '1.75rem'
+};
+
+export const xl: BadgeTokenSections.Xl = {
+    fontSize: '1rem',
+    minWidth: '2rem',
+    height: '2rem'
+};
+
+export const colorScheme: BadgeTokenSections.ColorScheme = {
+    light: {
+        primary: {
+            background: '{primary.color}',
+            color: '{primary.contrast.color}'
+        },
+        secondary: {
+            background: '{secondary.color}',
+            color: '{secondary.contrast.color}'
+        },
+        success: {
+            background: '{success.color}',
+            color: '{success.contrast.color}'
+        },
+        info: {
+            background: '{info.color}',
+            color: '{info.contrast.color}'
+        },
+        warn: {
+            background: '{warn.color}',
+            color: '{warn.contrast.color}'
+        },
+        danger: {
+            background: '{error.color}',
+            color: '{error.contrast.color}'
+        },
+        contrast: {
+            background: '{surface.950}',
+            color: '{surface.0}'
+        }
+    }
+};
+
+export default {
+    root,
+    dot,
+    sm,
+    lg,
+    xl,
+    colorScheme
+} satisfies BadgeDesignTokens;

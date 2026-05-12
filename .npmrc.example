@@ -1,0 +1,10 @@
+# Este archivo debe estar en la raíz de cada proyecto que use @nettalco/nettalco-theme
+# NO subir este archivo a git si contiene el token directamente
+
+# Opción 1: Usar variable de entorno (RECOMENDADO)
+@nettalco:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+
+# Opción 2: Token directo (NO RECOMENDADO para repos públicos)
+# @nettalco:registry=https://npm.pkg.github.com
+# //npm.pkg.github.com/:_authToken=ghp_TuTokenAquí123456789

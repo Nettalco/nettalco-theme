@@ -1,0 +1,35 @@
+{
+  "name": "@analistas-sistemas/nettalco-theme",
+  "version": "0.1.22",
+  "description": "Nettalco custom PrimeNG theme and components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Analistas-sistemas/nettalco-theme.git"
+  },
+  "scripts": {
+    "build": "ng-packagr -p ng-package.json",
+    "pack": "cd dist/nettalco-theme && npm pack"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "peerDependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@primeuix/themes": "^2.0.0",
+    "primeng": "^21.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@angular/compiler": "^21.2.0",
+    "@angular/compiler-cli": "^21.2.0",
+    "@primeuix/themes": "^2.0.3",
+    "ng-packagr": "^21.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.1.6",
+    "typescript": "~5.9.0"
+  }
+}
