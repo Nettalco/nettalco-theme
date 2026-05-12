@@ -19,7 +19,7 @@ export const title: DialogTokenSections.Title = {
 };
 
 export const content: DialogTokenSections.Content = {
-    padding: '0 {overlay.modal.padding} {overlay.modal.padding} {overlay.modal.padding}'
+    padding: '{overlay.modal.padding}'
 };
 
 export const footer: DialogTokenSections.Footer = {
@@ -39,7 +39,7 @@ export const colorScheme: DialogTokenSections.ColorScheme = {
 
 export const css: DialogTokenSections.CSS = `
 .p-dialog-header {
-    background: #D7E3FB;
+    background: #F1F5F9;
     color: #112A46;
 }
 .p-dialog-title {
@@ -49,7 +49,7 @@ export const css: DialogTokenSections.CSS = `
     color: #112A46;
 }
 .p-dialog-header-icon:hover {
-    background: #B4D3FD;
+    background: #E2E8F0;
     color: #112A46;
 }
 `;
