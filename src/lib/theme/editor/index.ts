@@ -36,25 +36,10 @@ export const content: EditorTokenSections.Content = {
     borderRadius: '{content.border.radius}'
 };
 
-export const colorScheme: EditorTokenSections.ColorScheme = {
-    light: {
-        toolbar: {
-            background: '{surface.50}',
-            borderColor: '{surface.200}'
-        },
-        content: {
-            background: '{surface.0}',
-            borderColor: '{surface.200}',
-            color: '{surface.700}'
-        }
-    }
-};
-
 export default {
     toolbar,
     toolbarItem,
     overlay,
     overlayOption,
-    content,
-    colorScheme
+    content
 } satisfies EditorDesignTokens;

@@ -40,6 +40,18 @@ export const colorScheme: ChipTokenSections.ColorScheme = {
         removeIcon: {
             color: '{surface.800}'
         }
+    },
+    dark: {
+        root: {
+            background: '{surface.800}',
+            color: '{surface.0}'
+        },
+        icon: {
+            color: '{surface.0}'
+        },
+        removeIcon: {
+            color: '{surface.0}'
+        }
     }
 };
 

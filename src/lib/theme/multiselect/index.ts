@@ -91,36 +91,6 @@ export const emptyMessage: MultiSelectTokenSections.EmptyMessage = {
     padding: '{list.option.padding}'
 };
 
-export const colorScheme: MultiSelectTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.300}',
-            color: '{surface.900}',
-            placeholderColor: '{surface.500}',
-            hoverBorderColor: '{secondary.500}',
-            focusBorderColor: '{secondary.500}'
-        },
-        dropdown: {
-            color: '{surface.500}'
-        },
-        overlay: {
-            background: '{surface.0}',
-            borderColor: '{surface.300}',
-            color: '{surface.900}'
-        },
-        option: {
-            focusBackground: '{surface.100}',
-            selectedBackground: '{secondary.600}',
-            selectedFocusBackground: '{secondary.500}',
-            color: '{surface.900}',
-            focusColor: '{surface.900}',
-            selectedColor: '{surface.0}',
-            selectedFocusColor: '{surface.0}'
-        }
-    }
-};
-
 export default {
     root,
     dropdown,
@@ -130,6 +100,5 @@ export default {
     optionGroup,
     chip,
     clearIcon,
-    emptyMessage,
-    colorScheme
+    emptyMessage
 } satisfies MultiSelectDesignTokens;

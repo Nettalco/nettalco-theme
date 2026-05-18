@@ -7,14 +7,12 @@ declare const list: MenuTokenSections.List;
 declare const item: MenuTokenSections.Item;
 declare const submenuLabel: MenuTokenSections.SubmenuLabel;
 declare const separator: MenuTokenSections.Separator;
-declare const colorScheme: MenuTokenSections.ColorScheme;
 declare const _default: {
     root: MenuTokenSections.Root;
     list: MenuTokenSections.List;
     item: MenuTokenSections.Item;
     submenuLabel: MenuTokenSections.SubmenuLabel;
     separator: MenuTokenSections.Separator;
-    colorScheme: MenuTokenSections.ColorScheme;
 };
 
-export { colorScheme, _default as default, item, list, root, separator, submenuLabel };
+export { _default as default, item, list, root, separator, submenuLabel };

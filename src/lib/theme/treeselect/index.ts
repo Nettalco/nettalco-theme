@@ -67,15 +67,6 @@ export const clearIcon: TreeSelectTokenSections.ClearIcon = {
     color: '{form.field.icon.color}'
 };
 
-export const colorScheme: TreeSelectTokenSections.ColorScheme = {
-    light: {
-        root: {
-            hoverBorderColor: '{primary.color}',
-            focusBorderColor: '{primary.color}'
-        }
-    }
-};
-
 export default {
     root,
     dropdown,
@@ -83,6 +74,5 @@ export default {
     tree,
     emptyMessage,
     chip,
-    clearIcon,
-    colorScheme
+    clearIcon
 } satisfies TreeSelectDesignTokens;

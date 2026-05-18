@@ -1,13 +1,5 @@
 import type { InputTextDesignTokens, InputTextTokenSections } from '@primeuix/themes/types/inputtext';
 
-/**
- * Configuración de InputText - Nettalco
- *
- * Colores del preset usados:
- * - Hover/Focus border: {primary.500} #082853 (navy blue)
- * - Invalid border: {error.500} #DC2626 (rojo)
- */
-
 export const root: InputTextTokenSections.Root = {
     background: '{form.field.background}',
     disabledBackground: '{form.field.disabled.background}',
@@ -46,23 +38,6 @@ export const root: InputTextTokenSections.Root = {
     }
 };
 
-export const colorScheme: InputTextTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.300}',
-            color: '{surface.900}',
-            placeholderColor: '{surface.500}',
-            hoverBorderColor: '{primary.500}',
-            focusBorderColor: '{primary.500}',
-            invalidBorderColor: '{error.500}',
-            disabledBackground: '{surface.100}',
-            disabledColor: '{surface.500}'
-        }
-    }
-};
-
 export default {
-    root,
-    colorScheme
+    root
 } satisfies InputTextDesignTokens;

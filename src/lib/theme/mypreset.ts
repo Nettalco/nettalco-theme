@@ -1,8 +1,15 @@
 // src/app/theme/mypreset.ts
 /**
  * Custom PrimeNG Theme Preset - Nettalco
+ * 
+ * Este preset extiende Aura de PrimeNG con la paleta de colores oficial de Nettalco.
+ * Utiliza una arquitectura de Design Tokens en dos niveles:
+ * 
+ * 1. Primitive Tokens: Define paletas de colores personalizadas (nettalcoPrimary, nettalcoSecondary, etc.)
+ * 2. Semantic Tokens: Referencias que mapean los primitivos a roles semánticos (primary, success, etc.)
  *
- * Paleta de colores oficial del branding v2:
+ * Paleta de colores oficial del branding Nettalco v2:
+ * 
  * Light mode:
  * - Primary: #112A46 (Azul Navy Oscuro)
  * - Secondary: #3F8CF9 (Azul Cielo)
@@ -34,6 +41,7 @@ import tag from './tag';
 import toast from './toast';
 import paginator from './paginator';
 import datatable from './datatable';
+import dataview from './dataview';
 import datepicker from './datepicker';
 import select from './select';
 import menu from './menu';
@@ -65,15 +73,59 @@ import floatlabel from './floatlabel';
 import galleria from './galleria';
 import iconfield from './iconfield';
 import iftalabel from './iftalabel';
+import image from './image';
+import imagecompare from './imagecompare';
+import inlinemessage from './inlinemessage';
+import inplace from './inplace';
+import inputgroup from './inputgroup';
+import inputnumber from './inputnumber';
+import inputotp from './inputotp';
+import knob from './knob';
+import megamenu from './megamenu';
+import message from './message';
+import metergroup from './metergroup';
+import orderlist from './orderlist';
+import organizationchart from './organizationchart';
+import overlaybadge from './overlaybadge';
+import panelmenu from './panelmenu';
+import password from './password';
+import picklist from './picklist';
+import popover from './popover';
+import progressbar from './progressbar';
+import progressspinner from './progressspinner';
+import radiobutton from './radiobutton';
+import rating from './rating';
+import ripple from './ripple';
+import scrollpanel from './scrollpanel';
+import selectbutton from './selectbutton';
+import skeleton from './skeleton';
+import slider from './slider';
+import speeddial from './speeddial';
+import splitbutton from './splitbutton';
+import splitter from './splitter';
+import stepper from './stepper';
+import steps from './steps';
+import tabmenu from './tabmenu';
+import tabs from './tabs';
+import tabview from './tabview';
+import terminal from './terminal';
+import textarea from './textarea';
+import tieredmenu from './tieredmenu';
+import timeline from './timeline';
+import togglebutton from './togglebutton';
+import toggleswitch from './toggleswitch';
+import toolbar from './toolbar';
+import tooltip from './tooltip';
+import tree from './tree';
+import treetable from './treetable';
+import virtualscroller from './virtualscroller';
 import css from './css';
 
 const MyPreset = definePreset(Aura, {
-  primitive: base.primitive,
-  semantic: {
-    ...base.semantic,
-    ...base.semantic,
-    primary: {
-      // Brand Primary v2 (#112A46)
+  primitive: {
+    ...base.primitive,
+    // Paleta personalizada Nettalco - Brand Primary v2 (#112A46)
+    nettalcoPrimary: {
       50: '#EDF4FF',
       100: '#D7E3FB',
       200: '#B4D3FD',
@@ -86,8 +138,8 @@ const MyPreset = definePreset(Aura, {
       900: '#22436F',
       950: '#0C3D5C',
     },
-    secondary: {
-      // Brand Secondary v2 (#3F8CF9)
+    // Paleta personalizada Nettalco - Brand Secondary v2 (#3F8CF9)
+    nettalcoSecondary: {
       50: '#EEF4FF',
       100: '#CAD8F1',
       200: '#ABC9F9',
@@ -100,8 +152,8 @@ const MyPreset = definePreset(Aura, {
       900: '#1F498E',
       950: '#0C3D5C',
     },
-    success: {
-      // Brand Success v2 (#2BA5CD)
+    // Paleta personalizada Nettalco - Brand Success v2 (#2BA5CD)
+    nettalcoSuccess: {
       50: '#D6E5FA',
       100: '#8CC3D7',
       200: '#6ECBCD',
@@ -114,8 +166,8 @@ const MyPreset = definePreset(Aura, {
       900: '#09718A',
       950: '#0A1D49',
     },
-    export: {
-      // Brand Export/Cyan Dark (#09718A)
+    // Paleta personalizada Nettalco - Brand Export/Cyan Dark (#09718A)
+    nettalcoExport: {
       50: '#D6E5FA',
       100: '#8CC3D7',
       200: '#52B8D0',
@@ -128,8 +180,8 @@ const MyPreset = definePreset(Aura, {
       900: '#0C3D5C',
       950: '#0A1D49',
     },
-    info: {
-      // Brand Info v2 (#66A6FB)
+    // Paleta personalizada Nettalco - Brand Info v2 (#66A6FB)
+    nettalcoInfo: {
       50: '#EDF4FF',
       100: '#B4D3FD',
       200: '#ABC9F9',
@@ -142,8 +194,8 @@ const MyPreset = definePreset(Aura, {
       900: '#336DD9',
       950: '#0C3D5C',
     },
-    warn: {
-      // Brand Warning v2 (#D57952)
+    // Paleta personalizada Nettalco - Brand Warning v2 (#D57952)
+    nettalcoWarn: {
       50: '#FEF3E2',
       100: '#E4DBE7',
       200: '#F4B33C',
@@ -156,20 +208,24 @@ const MyPreset = definePreset(Aura, {
       900: '#7D5423',
       950: '#5C3E1A',
     },
-    error: {
-      // Error/Danger (mantiene rojo estándar)
-      50: '#FEF2F2',
-      100: '#FECACA',
-      200: '#FCA5A5',
-      300: '#F87171',
-      400: '#EF4444',
-      500: '#DC2626',
-      600: '#B91C1C',
-      700: '#991B1B',
-      800: '#7F1D1D',
-      900: '#6B1C1C',
-      950: '#450A0A',
+  },
+  semantic: {
+    ...base.semantic,
+    // Tokens semánticos que apuntan a las paletas personalizadas
+    primary: {
+      50: '{nettalcoPrimary.50}',
+      100: '{nettalcoPrimary.100}',
+      200: '{nettalcoPrimary.200}',
+      300: '{nettalcoPrimary.300}',
+      400: '{nettalcoPrimary.400}',
+      500: '{nettalcoPrimary.500}',
+      600: '{nettalcoPrimary.600}',
+      700: '{nettalcoPrimary.700}',
+      800: '{nettalcoPrimary.800}',
+      900: '{nettalcoPrimary.900}',
+      950: '{nettalcoPrimary.950}',
     },
+    // Sobrescribir colorScheme con colores Nettalco
     colorScheme: {
       light: {
         surface: {
@@ -187,140 +243,128 @@ const MyPreset = definePreset(Aura, {
           950: '#020617',
         },
         primary: {
-          color: '#112A46',
+          color: '{nettalcoPrimary.500}',
           contrastColor: '#ffffff',
-          hoverColor: '#22436F',
-          activeColor: '#2B5DA1',
+          hoverColor: '{nettalcoPrimary.900}',
+          activeColor: '{nettalcoPrimary.800}',
         },
         secondary: {
-          color: '#3F8CF9',
+          color: '{nettalcoSecondary.500}',
           contrastColor: '#ffffff',
-          hoverColor: '#5A9FFC',
-          activeColor: '#5398F8',
+          hoverColor: '{nettalcoSecondary.400}',
+          activeColor: '{nettalcoSecondary.600}',
         },
         success: {
-          color: '#2BA5CD',
+          color: '{nettalcoSuccess.500}',
           contrastColor: '#ffffff',
-          hoverColor: '#45B1CE',
-          activeColor: '#3CAAC8',
-        },
-        export: {
-          color: '#09718A',
-          contrastColor: '#ffffff',
-          hoverColor: '#258FA6',
-          activeColor: '#1A859D',
+          hoverColor: '{nettalcoSuccess.300}',
+          activeColor: '{nettalcoSuccess.400}',
         },
         info: {
-          color: '#66A6FB',
+          color: '{nettalcoInfo.500}',
           contrastColor: '#ffffff',
-          hoverColor: '#7CB2FA',
-          activeColor: '#B4D3FD',
+          hoverColor: '{nettalcoInfo.300}',
+          activeColor: '{nettalcoInfo.100}',
         },
         warn: {
-          color: '#D57952',
+          color: '{nettalcoWarn.500}',
           contrastColor: '#ffffff',
-          hoverColor: '#D78158',
-          activeColor: '#DE956A',
+          hoverColor: '{nettalcoWarn.600}',
+          activeColor: '{nettalcoWarn.400}',
         },
         error: {
-          color: '#DC2626',
+          color: '{red.500}',
           contrastColor: '#ffffff',
-          hoverColor: '#B91C1C',
-          activeColor: '#991B1B',
+          hoverColor: '{red.600}',
+          activeColor: '{red.700}',
         },
         help: {
-          color: '#8B5CF6',
+          color: '{violet.500}',
           contrastColor: '#ffffff',
-          hoverColor: '#7C3AED',
-          activeColor: '#6D28D9',
+          hoverColor: '{violet.600}',
+          activeColor: '{violet.700}',
         },
         contrast: {
-          color: '#1F2937',
+          color: '{slate.900}',
           contrastColor: '#ffffff',
-          hoverColor: '#374151',
-          activeColor: '#4B5563',
+          hoverColor: '{slate.800}',
+          activeColor: '{slate.700}',
         },
         highlight: {
-          background: '#EDF4FF',
-          focusBackground: '#D7E3FB',
-          color: '#1F498E',
-          focusColor: '#2B5DA1',
+          background: '{nettalcoPrimary.50}',
+          focusBackground: '{nettalcoPrimary.100}',
+          color: '{nettalcoPrimary.700}',
+          focusColor: '{nettalcoPrimary.800}',
         },
       },
       dark: {
         surface: {
-          0:   '#f0f5fb',   // texto principal
-          50:  '#c8d8ea',
+          0: '#f0f5fb',
+          50: '#c8d8ea',
           100: '#8fa8c4',
           200: '#5a7a9e',
-          300: '#3d5a7e',   // hover bg
-          400: '#2e476d',   // border
-          500: '#253a5e',   // panel / input bg
-          600: '#1c2f50',   // card bg
-          700: '#152540',   // sidebar
-          800: '#0f1e35',   // app background
-          900: '#0a1628',   // base background
-          950: '#060d1a',   // más profundo
+          300: '#3d5a7e',
+          400: '#2e476d',
+          500: '#253a5e',
+          600: '#1c2f50',
+          700: '#152540',
+          800: '#0f1e35',
+          900: '#0a1628',
+          950: '#060d1a',
         },
         primary: {
-          color:         '#EDF4FF',   // Azul muy claro como primario en dark
-          contrastColor: '#112A46',   // Navy oscuro para contraste sobre fondo claro
-          hoverColor:    '#EEF4FF',
-          activeColor:   '#336DD9',
+          color: '{nettalcoPrimary.50}',
+          contrastColor: '{nettalcoPrimary.500}',
+          hoverColor: '{nettalcoPrimary.100}',
+          activeColor: '{nettalcoPrimary.400}',
         },
         secondary: {
-          color:         '#3A72E0',
+          color: '{nettalcoSecondary.700}',
           contrastColor: '#ffffff',
-          hoverColor:    '#2B5FBC',
-          activeColor:   '#1F498E',
+          hoverColor: '{nettalcoSecondary.800}',
+          activeColor: '{nettalcoSecondary.900}',
         },
         success: {
-          color:         '#6ECBCD',
-          contrastColor: '#0C3D5C',
-          hoverColor:    '#19819D',
-          activeColor:   '#0C566F',
-        },
-        export: {
-          color:         '#52B8D0',
-          contrastColor: '#ffffff',
-          hoverColor:    '#3C9EB5',
-          activeColor:   '#248297',
+          color: '{nettalcoSuccess.200}',
+          contrastColor: '{nettalcoSuccess.800}',
+          hoverColor: '{nettalcoSuccess.600}',
+          activeColor: '{nettalcoSuccess.700}',
         },
         info: {
-          color:         '#69A7ED',
+          color: '{nettalcoInfo.400}',
           contrastColor: '#ffffff',
-          hoverColor:    '#5389DB',
-          activeColor:   '#4775BF',
+          hoverColor: '{nettalcoInfo.600}',
+          activeColor: '{nettalcoInfo.700}',
         },
         warn: {
-          color:         '#F4B33C',
-          contrastColor: '#7C2D12',
-          hoverColor:    '#F2A61E',
-          activeColor:   '#CA8825',
+          color: '{nettalcoWarn.200}',
+          contrastColor: '{orange.950}',
+          hoverColor: '{nettalcoWarn.300}',
+          activeColor: '{nettalcoWarn.700}',
         },
         error: {
-          color:         '#F87171',
-          contrastColor: '#7F1D1D',
-          hoverColor:    '#FCA5A5',
-          activeColor:   '#FECACA',
+          color: '{red.400}',
+          contrastColor: '{red.900}',
+          hoverColor: '{red.300}',
+          activeColor: '{red.200}',
         },
         help: {
-          color:         '#A78BFA',
-          contrastColor: '#4C1D95',
-          hoverColor:    '#C4B5FD',
-          activeColor:   '#DDD6FE',
+          color: '{violet.400}',
+          contrastColor: '{violet.950}',
+          hoverColor: '{violet.300}',
+          activeColor: '{violet.200}',
         },
         contrast: {
-          color:         '#F9FAFB',
-          contrastColor: '#1F2937',
-          hoverColor:    '#F3F4F6',
-          activeColor:   '#E5E7EB',
+          color: '{slate.50}',
+          contrastColor: '{slate.900}',
+          hoverColor: '{slate.100}',
+          activeColor: '{slate.200}',
         },
         highlight: {
-          background:      '#1F498E',   // primary.900
-          focusBackground: '#2B5DA1',   // primary.800
-          color:           '#7CB2FA',   // secondary.300
-          focusColor:      '#ABC9F9',   // secondary.200
+          background: '{nettalcoPrimary.900}',
+          focusBackground: '{nettalcoPrimary.800}',
+          color: '{nettalcoSecondary.300}',
+          focusColor: '{nettalcoSecondary.200}',
         },
       },
     },
@@ -329,26 +373,12 @@ const MyPreset = definePreset(Aura, {
   components: {
     accordion,
     autocomplete,
-    button,
-    inputchips,
-    inputtext,
-    card,
-    tag,
-    toast,
-    paginator,
-    datatable,
-    datepicker,
-    select,
-    menu,
-    multiselect,
-    menubar,
-    listbox,
-    treeselect,
-    panel,
     avatar,
     badge,
     blockui,
     breadcrumb,
+    button,
+    card,
     carousel,
     cascadeselect,
     checkbox,
@@ -357,6 +387,9 @@ const MyPreset = definePreset(Aura, {
     confirmdialog,
     confirmpopup,
     contextmenu,
+    datatable,
+    dataview,
+    datepicker,
     dialog,
     divider,
     dock,
@@ -368,6 +401,64 @@ const MyPreset = definePreset(Aura, {
     galleria,
     iconfield,
     iftalabel,
+    image,
+    imagecompare,
+    inlinemessage,
+    inplace,
+    inputchips,
+    inputgroup,
+    inputnumber,
+    inputotp,
+    inputtext,
+    knob,
+    listbox,
+    megamenu,
+    menu,
+    menubar,
+    message,
+    metergroup,
+    multiselect,
+    orderlist,
+    organizationchart,
+    overlaybadge,
+    paginator,
+    panel,
+    panelmenu,
+    password,
+    picklist,
+    popover,
+    progressbar,
+    progressspinner,
+    radiobutton,
+    rating,
+    ripple,
+    scrollpanel,
+    select,
+    selectbutton,
+    skeleton,
+    slider,
+    speeddial,
+    splitbutton,
+    splitter,
+    stepper,
+    steps,
+    tabmenu,
+    tabs,
+    tabview,
+    tag,
+    terminal,
+    textarea,
+    tieredmenu,
+    timeline,
+    toast,
+    togglebutton,
+    toggleswitch,
+    toolbar,
+    tooltip,
+    tree,
+    treeselect,
+    treetable,
+    virtualscroller,
   },
 });
 

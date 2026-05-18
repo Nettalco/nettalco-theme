@@ -135,16 +135,30 @@ export const timePicker: DatePickerTokenSections.TimePicker = {
 export const colorScheme: DatePickerTokenSections.ColorScheme = {
     light: {
         dropdown: {
-            background: '{surface.50}',
-            hoverBackground: '{primary.color}',
-            activeBackground: '{primary.600}',
-            color: '{primary.color}',
-            hoverColor: '{primary.contrast.color}',
-            activeColor: '{primary.contrast.color}'
+            background: '{surface.100}',
+            hoverBackground: '{surface.200}',
+            activeBackground: '{surface.300}',
+            color: '{surface.600}',
+            hoverColor: '{surface.700}',
+            activeColor: '{surface.800}'
         },
         today: {
-            background: '{primary.50}',
-            color: '{primary.color}'
+            background: '{surface.200}',
+            color: '{surface.900}'
+        }
+    },
+    dark: {
+        dropdown: {
+            background: '{surface.800}',
+            hoverBackground: '{surface.700}',
+            activeBackground: '{surface.600}',
+            color: '{surface.300}',
+            hoverColor: '{surface.200}',
+            activeColor: '{surface.100}'
+        },
+        today: {
+            background: '{surface.700}',
+            color: '{surface.0}'
         }
     }
 };

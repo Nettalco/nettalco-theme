@@ -1,16 +1,5 @@
 import type { SelectDesignTokens, SelectTokenSections } from '@primeuix/themes/types/select';
 
-/**
- * Configuración de Select - Nettalco
- *
- * Colores del preset usados:
- * - Fondo y bordes: surface tokens
- * - Hover/focus: {secondary.500}
- * - Opción seleccionada: {secondary.500}/{secondary.600}
- *
- * Solo light mode - sin dark mode.
- */
-
 export const root: SelectTokenSections.Root = {
     background: '{form.field.background}',
     disabledBackground: '{form.field.disabled.background}',
@@ -103,36 +92,6 @@ export const emptyMessage: SelectTokenSections.EmptyMessage = {
     padding: '{list.option.padding}'
 };
 
-export const colorScheme: SelectTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.300}',
-            color: '{surface.900}',
-            hoverBorderColor: '{secondary.500}',
-            focusBorderColor: '{secondary.500}',
-            placeholderColor: '{surface.500}'
-        },
-        dropdown: {
-            color: '{surface.600}'
-        },
-        overlay: {
-            background: '{surface.0}',
-            borderColor: '{surface.200}',
-            color: '{surface.900}'
-        },
-        option: {
-            focusBackground: '{surface.100}',
-            selectedBackground: '{secondary.500}',
-            selectedFocusBackground: '{secondary.600}',
-            color: '{surface.900}',
-            focusColor: '{surface.900}',
-            selectedColor: '{surface.0}',
-            selectedFocusColor: '{surface.0}'
-        }
-    }
-};
-
 export default {
     root,
     dropdown,
@@ -142,6 +101,5 @@ export default {
     optionGroup,
     clearIcon,
     checkmark,
-    emptyMessage,
-    colorScheme
+    emptyMessage
 } satisfies SelectDesignTokens;

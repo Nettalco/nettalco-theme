@@ -113,20 +113,25 @@ export const closeButtonIcon: GalleriaTokenSections.CloseButtonIcon = {
 
 export const colorScheme: GalleriaTokenSections.ColorScheme = {
     light: {
-        root: {
-            borderColor: '{surface.200}'
-        },
-        thumbnailsContent: {
-            background: '{surface.0}'
-        },
         thumbnailNavButton: {
             hoverBackground: '{surface.100}',
-            color: '{surface.500}',
+            color: '{surface.600}',
             hoverColor: '{surface.700}'
         },
         indicatorButton: {
             background: '{surface.200}',
             hoverBackground: '{surface.300}'
+        }
+    },
+    dark: {
+        thumbnailNavButton: {
+            hoverBackground: '{surface.700}',
+            color: '{surface.400}',
+            hoverColor: '{surface.0}'
+        },
+        indicatorButton: {
+            background: '{surface.700}',
+            hoverBackground: '{surface.600}'
         }
     }
 };

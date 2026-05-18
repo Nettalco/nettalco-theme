@@ -6,28 +6,17 @@ export const root: IftaLabelTokenSections.Root = {
     invalidColor: '{form.field.float.label.invalid.color}',
     transitionDuration: '0.2s',
     positionX: '{form.field.padding.x}',
-    top: '0.5rem',
+    top: '{form.field.padding.y}',
     fontSize: '0.75rem',
     fontWeight: '400'
 };
 
 export const input: IftaLabelTokenSections.Input = {
     paddingTop: '1.5rem',
-    paddingBottom: '0.5rem'
-};
-
-export const colorScheme: IftaLabelTokenSections.ColorScheme = {
-    light: {
-        root: {
-            color: '{surface.500}',
-            focusColor: '{primary.color}',
-            invalidColor: '{red.500}'
-        }
-    }
+    paddingBottom: '{form.field.padding.y}'
 };
 
 export default {
     root,
-    input,
-    colorScheme
+    input
 } satisfies IftaLabelDesignTokens;

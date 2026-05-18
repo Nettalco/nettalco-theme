@@ -39,21 +39,9 @@ export const on: FloatLabelTokenSections.On = {
     }
 };
 
-export const colorScheme: FloatLabelTokenSections.ColorScheme = {
-    light: {
-        root: {
-            color: '{surface.500}',
-            focusColor: '{primary.color}',
-            activeColor: '{surface.500}',
-            invalidColor: '{red.500}'
-        }
-    }
-};
-
 export default {
     root,
     over,
     in: inside,
-    on,
-    colorScheme
+    on
 } satisfies FloatLabelDesignTokens;

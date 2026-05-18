@@ -38,37 +38,10 @@ export const separator: MenuTokenSections.Separator = {
     borderColor: '{content.border.color}'
 };
 
-export const colorScheme: MenuTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.200}',
-            color: '{surface.900}'
-        },
-        item: {
-            focusBackground: '{surface.100}',
-            color: '{surface.800}',
-            focusColor: '{primary.500}',
-            icon: {
-                color: '{surface.600}',
-                focusColor: '{primary.500}'
-            }
-        },
-        submenuLabel: {
-            background: '{surface.50}',
-            color: '{surface.700}'
-        },
-        separator: {
-            borderColor: '{surface.200}'
-        }
-    }
-};
-
 export default {
     root,
     list,
     item,
     submenuLabel,
-    separator,
-    colorScheme
+    separator
 } satisfies MenuDesignTokens;

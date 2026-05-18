@@ -1,20 +1,5 @@
 import type { ListboxDesignTokens, ListboxTokenSections } from '@primeuix/themes/types/listbox';
 
-/**
- * Configuración de Listbox - Nettalco
- *
- * Colores del preset usados:
- * - Background: {surface.0} #ffffff
- * - Border: {surface.300} #cbd5e1
- * - Text color: {surface.900} #0f172a
- * - Focus background: {surface.100} #f1f5f9
- * - Selected background: {secondary.600} #5398F8
- * - Selected color: {surface.0} #ffffff
- * - Striped background: {surface.50} #f8fafc
- *
- * Solo light mode - sin dark mode.
- */
-
 export const root: ListboxTokenSections.Root = {
     background: '{form.field.background}',
     disabledBackground: '{form.field.disabled.background}',
@@ -66,20 +51,13 @@ export const emptyMessage: ListboxTokenSections.EmptyMessage = {
 
 export const colorScheme: ListboxTokenSections.ColorScheme = {
     light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.300}',
-            color: '{surface.900}'
-        },
         option: {
-            focusBackground: '{surface.100}',
-            selectedBackground: '{secondary.600}',
-            selectedFocusBackground: '{secondary.500}',
-            color: '{surface.900}',
-            focusColor: '{surface.900}',
-            selectedColor: '{surface.0}',
-            selectedFocusColor: '{surface.0}',
             stripedBackground: '{surface.50}'
+        }
+    },
+    dark: {
+        option: {
+            stripedBackground: '{surface.900}'
         }
     }
 };

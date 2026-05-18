@@ -31,6 +31,15 @@ export const colorScheme: ColorPickerTokenSections.ColorScheme = {
         handle: {
             color: '{surface.0}'
         }
+    },
+    dark: {
+        panel: {
+            background: '{surface.900}',
+            borderColor: '{surface.700}'
+        },
+        handle: {
+            color: '{surface.0}'
+        }
     }
 };
 

@@ -1,19 +1,5 @@
 import type { MenubarDesignTokens, MenubarTokenSections } from '@primeuix/themes/types/menubar';
 
-/**
- * Configuración de Menubar - Nettalco
- *
- * Colores del preset usados:
- * - Background: {surface.0} #ffffff
- * - Border: {surface.300} #cbd5e1
- * - Text color: {surface.900} #0f172a
- * - Focus background: {surface.100} #f1f5f9
- * - Active background: {primary.50} #EDF4FF
- * - Active color: {primary.500} #082853
- *
- * Solo light mode - sin dark mode.
- */
-
 export const root: MenubarTokenSections.Root = {
     background: '{content.background}',
     borderColor: '{content.border.color}',
@@ -80,29 +66,11 @@ export const mobileButton: MenubarTokenSections.MobileButton = {
     }
 };
 
-export const colorScheme: MenubarTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.300}',
-            color: '{surface.900}'
-        },
-        item: {
-            focusBackground: '{surface.100}',
-            activeBackground: '{primary.50}',
-            color: '{surface.900}',
-            focusColor: '{surface.900}',
-            activeColor: '{primary.500}'
-        }
-    }
-};
-
 export default {
     root,
     baseItem,
     item,
     submenu,
     separator,
-    mobileButton,
-    colorScheme
+    mobileButton
 } satisfies MenubarDesignTokens;

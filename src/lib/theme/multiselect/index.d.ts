@@ -11,7 +11,6 @@ declare const optionGroup: MultiSelectTokenSections.OptionGroup;
 declare const clearIcon: MultiSelectTokenSections.ClearIcon;
 declare const chip: MultiSelectTokenSections.Chip;
 declare const emptyMessage: MultiSelectTokenSections.EmptyMessage;
-declare const colorScheme: MultiSelectTokenSections.ColorScheme;
 declare const _default: {
     root: MultiSelectTokenSections.Root;
     dropdown: MultiSelectTokenSections.Dropdown;
@@ -22,7 +21,6 @@ declare const _default: {
     chip: MultiSelectTokenSections.Chip;
     clearIcon: MultiSelectTokenSections.ClearIcon;
     emptyMessage: MultiSelectTokenSections.EmptyMessage;
-    colorScheme: MultiSelectTokenSections.ColorScheme;
 };
 
-export { chip, clearIcon, colorScheme, _default as default, dropdown, emptyMessage, list, option, optionGroup, overlay, root };
+export { chip, clearIcon, _default as default, dropdown, emptyMessage, list, option, optionGroup, overlay, root };

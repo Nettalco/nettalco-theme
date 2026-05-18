@@ -1,16 +1,5 @@
 import type { DataTableDesignTokens, DataTableTokenSections } from '@primeuix/themes/types/datatable';
 
-/**
- * Configuración de DataTable - Nettalco
- *
- * Colores del preset usados:
- * - Header/rows: surface tokens (fondos claros)
- * - Hover/selected: primary y highlight tokens
- * - Striped rows: {surface.50}
- *
- * Solo light mode - sin dark mode.
- */
-
 export const root: DataTableTokenSections.Root = {
     transitionDuration: '{transition.duration}'
 };
@@ -117,7 +106,7 @@ export const footer: DataTableTokenSections.Footer = {
 };
 
 export const dropPoint: DataTableTokenSections.DropPoint = {
-    color: '{primary.500}'
+    color: '{primary.color}'
 };
 
 export const columnResizer: DataTableTokenSections.ColumnResizer = {
@@ -126,7 +115,7 @@ export const columnResizer: DataTableTokenSections.ColumnResizer = {
 
 export const resizeIndicator: DataTableTokenSections.ResizeIndicator = {
     width: '1px',
-    color: '{primary.500}'
+    color: '{primary.color}'
 };
 
 export const sortIcon: DataTableTokenSections.SortIcon = {
@@ -144,7 +133,7 @@ export const rowToggleButton: DataTableTokenSections.RowToggleButton = {
     selectedHoverBackground: '{content.background}',
     color: '{text.muted.color}',
     hoverColor: '{text.color}',
-    selectedHoverColor: '{primary.500}',
+    selectedHoverColor: '{primary.color}',
     size: '1.75rem',
     borderRadius: '50%',
     focusRing: {
@@ -217,6 +206,17 @@ export const colorScheme: DataTableTokenSections.ColorScheme = {
         },
         bodyCell: {
             selectedBorderColor: '{primary.100}'
+        }
+    },
+    dark: {
+        root: {
+            borderColor: '{surface.800}'
+        },
+        row: {
+            stripedBackground: '{surface.950}'
+        },
+        bodyCell: {
+            selectedBorderColor: '{primary.900}'
         }
     }
 };

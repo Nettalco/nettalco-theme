@@ -36,8 +36,8 @@ export const colorScheme: BadgeTokenSections.ColorScheme = {
             color: '{primary.contrast.color}'
         },
         secondary: {
-            background: '{secondary.color}',
-            color: '{secondary.contrast.color}'
+            background: '{surface.100}',
+            color: '{surface.600}'
         },
         success: {
             background: '{success.color}',
@@ -58,6 +58,36 @@ export const colorScheme: BadgeTokenSections.ColorScheme = {
         contrast: {
             background: '{surface.950}',
             color: '{surface.0}'
+        }
+    },
+    dark: {
+        primary: {
+            background: '{primary.color}',
+            color: '{primary.contrast.color}'
+        },
+        secondary: {
+            background: '{surface.800}',
+            color: '{surface.300}'
+        },
+        success: {
+            background: '{success.color}',
+            color: '{success.contrast.color}'
+        },
+        info: {
+            background: '{info.color}',
+            color: '{info.contrast.color}'
+        },
+        warn: {
+            background: '{warn.color}',
+            color: '{warn.contrast.color}'
+        },
+        danger: {
+            background: '{error.color}',
+            color: '{error.contrast.color}'
+        },
+        contrast: {
+            background: '{surface.0}',
+            color: '{surface.950}'
         }
     }
 };

@@ -32,27 +32,11 @@ export const footer: PanelTokenSections.Footer = {
     padding: '0 1.125rem 1.125rem 1.125rem'
 };
 
-export const colorScheme: PanelTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.200}',
-            color: '{surface.900}'
-        },
-        header: {
-            background: '{surface.50}',
-            borderColor: '{surface.200}',
-            color: '{primary.color}'
-        }
-    }
-};
-
 export default {
     root,
     header,
     toggleableHeader,
     title,
     content,
-    footer,
-    colorScheme
+    footer
 } satisfies PanelDesignTokens;

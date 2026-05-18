@@ -45,22 +45,6 @@ export const basic: FileUploadTokenSections.Basic = {
     gap: '0.5rem'
 };
 
-export const colorScheme: FileUploadTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.200}',
-            color: '{surface.700}'
-        },
-        header: {
-            color: '{surface.700}'
-        },
-        file: {
-            borderColor: '{surface.200}'
-        }
-    }
-};
-
 export default {
     root,
     header,
@@ -68,6 +52,5 @@ export default {
     file,
     fileList,
     progressbar,
-    basic,
-    colorScheme
+    basic
 } satisfies FileUploadDesignTokens;

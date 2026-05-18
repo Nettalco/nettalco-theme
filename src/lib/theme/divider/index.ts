@@ -25,22 +25,9 @@ export const vertical: DividerTokenSections.Vertical = {
     }
 };
 
-export const colorScheme: DividerTokenSections.ColorScheme = {
-    light: {
-        root: {
-            borderColor: '{surface.200}'
-        },
-        content: {
-            background: '{surface.0}',
-            color: '{surface.700}'
-        }
-    }
-};
-
 export default {
     root,
     content,
     horizontal,
-    vertical,
-    colorScheme
+    vertical
 } satisfies DividerDesignTokens;

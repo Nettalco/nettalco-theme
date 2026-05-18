@@ -1,15 +1,5 @@
 import type { InputChipsDesignTokens, InputChipsTokenSections } from '@primeuix/themes/types/inputchips';
 
-/**
- * Configuración de InputChips - Nettalco
- *
- * Colores del preset para chips:
- * - Focus background: {primary.50} #EDF4FF (fondo claro del primary)
- * - Text color: {primary.500} #082853 (primary color)
- *
- * Solo light mode - sin dark mode.
- */
-
 export const root: InputChipsTokenSections.Root = {
     background: '{form.field.background}',
     disabledBackground: '{form.field.disabled.background}',
@@ -43,8 +33,14 @@ export const chip: InputChipsTokenSections.Chip = {
 export const colorScheme: InputChipsTokenSections.ColorScheme = {
     light: {
         chip: {
-            focusBackground: '{primary.50}',
-            color: '{primary.500}'
+            focusBackground: '{surface.200}',
+            color: '{surface.800}'
+        }
+    },
+    dark: {
+        chip: {
+            focusBackground: '{surface.700}',
+            color: '{surface.0}'
         }
     }
 };

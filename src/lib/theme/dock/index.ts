@@ -20,17 +20,7 @@ export const item: DockTokenSections.Item = {
     }
 };
 
-export const colorScheme: DockTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.200}'
-        }
-    }
-};
-
 export default {
     root,
-    item,
-    colorScheme
+    item
 } satisfies DockDesignTokens;

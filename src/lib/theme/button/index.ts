@@ -1,34 +1,5 @@
 import type { ButtonDesignTokens, ButtonTokenSections } from '@primeuix/themes/types/button';
 
-/**
- * Configuración de Botones - Nettalco
- *
- * Branding v2 - Los tokens se adaptan automáticamente según el modo:
- * 
- * Light mode:
- * - Primary: #112A46 (Navy Oscuro) → #22436F → #2B5DA1
- * - Secondary: #3F8CF9 (Azul Cielo) → #5A9FFC → #5398F8
- * - Success: #2BA5CD (Cyan) → #45B1CE → #3CAAC8
- * - Export: #09718A (Cyan Oscuro) → #258FA6 → #1A859D
- * - Warning: #D57952 → #D78158 → #DE956A
- * - Info: #66A6FB → #7CB2FA → #B4D3FD
- * - Help: #8B5CF6 (Púrpura) → #7C3AED → #6D28D9
- * - Contrast: #1F2937 (Gris Oscuro) → #374151 → #4B5563
- * 
- * Dark mode:
- * - Primary: #EDF4FF (Azul muy claro) → #EEF4FF → #336DD9
- * - Secondary: #3A72E0 → #2B5FBC → #1F498E
- * - Success: #6ECBCD → #19819D → #0C566F
- * - Export: #52B8D0 → #3C9EB5 → #248297
- * - Warning: #F4B33C → #F2A61E → #CA8825
- * - Info: #69A7ED → #5389DB → #4775BF
- * - Help: #A78BFA (Púrpura Claro) → #C4B5FD → #DDD6FE
- * - Contrast: #F9FAFB (Gris Claro) → #F3F4F6 → #E5E7EB
- * 
- * Los tokens semánticos ({primary.color}, etc.) se resuelven automáticamente
- * según el colorScheme activo definido en mypreset.ts
- */
-
 export const root: ButtonTokenSections.Root = {
     borderRadius: '{form.field.border.radius}',
     roundedBorderRadius: '2rem',
@@ -66,44 +37,44 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
         root: {
             primary: {
                 background: '{primary.color}',
-                hoverBackground: '{primary.hoverColor}',
-                activeBackground: '{primary.activeColor}',
+                hoverBackground: '{primary.hover.color}',
+                activeBackground: '{primary.active.color}',
                 borderColor: '{primary.color}',
-                hoverBorderColor: '{primary.hoverColor}',
-                activeBorderColor: '{primary.activeColor}',
-                color: '{primary.contrastColor}',
-                hoverColor: '{primary.contrastColor}',
-                activeColor: '{primary.contrastColor}',
+                hoverBorderColor: '{primary.hover.color}',
+                activeBorderColor: '{primary.active.color}',
+                color: '{primary.contrast.color}',
+                hoverColor: '{primary.contrast.color}',
+                activeColor: '{primary.contrast.color}',
                 focusRing: {
                     color: '{primary.color}',
                     shadow: 'none'
                 }
             },
             secondary: {
-                background: '{secondary.color}',
-                hoverBackground: '{secondary.hoverColor}',
-                activeBackground: '{secondary.activeColor}',
-                borderColor: '{secondary.color}',
-                hoverBorderColor: '{secondary.hoverColor}',
-                activeBorderColor: '{secondary.activeColor}',
-                color: '{secondary.contrastColor}',
-                hoverColor: '{secondary.contrastColor}',
-                activeColor: '{secondary.contrastColor}',
+                background: '{surface.100}',
+                hoverBackground: '{surface.200}',
+                activeBackground: '{surface.300}',
+                borderColor: '{surface.100}',
+                hoverBorderColor: '{surface.200}',
+                activeBorderColor: '{surface.300}',
+                color: '{surface.600}',
+                hoverColor: '{surface.700}',
+                activeColor: '{surface.800}',
                 focusRing: {
-                    color: '{secondary.color}',
+                    color: '{surface.600}',
                     shadow: 'none'
                 }
             },
             info: {
                 background: '{info.color}',
-                hoverBackground: '{info.hoverColor}',
-                activeBackground: '{info.activeColor}',
+                hoverBackground: '{info.hover.color}',
+                activeBackground: '{info.active.color}',
                 borderColor: '{info.color}',
-                hoverBorderColor: '{info.hoverColor}',
-                activeBorderColor: '{info.activeColor}',
-                color: '{info.contrastColor}',
-                hoverColor: '{info.contrastColor}',
-                activeColor: '{info.contrastColor}',
+                hoverBorderColor: '{info.hover.color}',
+                activeBorderColor: '{info.active.color}',
+                color: '{info.contrast.color}',
+                hoverColor: '{info.contrast.color}',
+                activeColor: '{info.contrast.color}',
                 focusRing: {
                     color: '{info.color}',
                     shadow: 'none'
@@ -111,14 +82,14 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             },
             success: {
                 background: '{success.color}',
-                hoverBackground: '{success.hoverColor}',
-                activeBackground: '{success.activeColor}',
+                hoverBackground: '{success.hover.color}',
+                activeBackground: '{success.active.color}',
                 borderColor: '{success.color}',
-                hoverBorderColor: '{success.hoverColor}',
-                activeBorderColor: '{success.activeColor}',
-                color: '{success.contrastColor}',
-                hoverColor: '{success.contrastColor}',
-                activeColor: '{success.contrastColor}',
+                hoverBorderColor: '{success.hover.color}',
+                activeBorderColor: '{success.active.color}',
+                color: '{success.contrast.color}',
+                hoverColor: '{success.contrast.color}',
+                activeColor: '{success.contrast.color}',
                 focusRing: {
                     color: '{success.color}',
                     shadow: 'none'
@@ -126,14 +97,14 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             },
             warn: {
                 background: '{warn.color}',
-                hoverBackground: '{warn.hoverColor}',
-                activeBackground: '{warn.activeColor}',
+                hoverBackground: '{warn.hover.color}',
+                activeBackground: '{warn.active.color}',
                 borderColor: '{warn.color}',
-                hoverBorderColor: '{warn.hoverColor}',
-                activeBorderColor: '{warn.activeColor}',
-                color: '{warn.contrastColor}',
-                hoverColor: '{warn.contrastColor}',
-                activeColor: '{warn.contrastColor}',
+                hoverBorderColor: '{warn.hover.color}',
+                activeBorderColor: '{warn.active.color}',
+                color: '{warn.contrast.color}',
+                hoverColor: '{warn.contrast.color}',
+                activeColor: '{warn.contrast.color}',
                 focusRing: {
                     color: '{warn.color}',
                     shadow: 'none'
@@ -141,14 +112,14 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             },
             help: {
                 background: '{help.color}',
-                hoverBackground: '{help.hoverColor}',
-                activeBackground: '{help.activeColor}',
+                hoverBackground: '{help.hover.color}',
+                activeBackground: '{help.active.color}',
                 borderColor: '{help.color}',
-                hoverBorderColor: '{help.hoverColor}',
-                activeBorderColor: '{help.activeColor}',
-                color: '{help.contrastColor}',
-                hoverColor: '{help.contrastColor}',
-                activeColor: '{help.contrastColor}',
+                hoverBorderColor: '{help.hover.color}',
+                activeBorderColor: '{help.active.color}',
+                color: '{help.contrast.color}',
+                hoverColor: '{help.contrast.color}',
+                activeColor: '{help.contrast.color}',
                 focusRing: {
                     color: '{help.color}',
                     shadow: 'none'
@@ -156,186 +127,186 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             },
             danger: {
                 background: '{error.color}',
-                hoverBackground: '{error.hoverColor}',
-                activeBackground: '{error.activeColor}',
+                hoverBackground: '{error.hover.color}',
+                activeBackground: '{error.active.color}',
                 borderColor: '{error.color}',
-                hoverBorderColor: '{error.hoverColor}',
-                activeBorderColor: '{error.activeColor}',
-                color: '{error.contrastColor}',
-                hoverColor: '{error.contrastColor}',
-                activeColor: '{error.contrastColor}',
+                hoverBorderColor: '{error.hover.color}',
+                activeBorderColor: '{error.active.color}',
+                color: '{error.contrast.color}',
+                hoverColor: '{error.contrast.color}',
+                activeColor: '{error.contrast.color}',
                 focusRing: {
                     color: '{error.color}',
                     shadow: 'none'
                 }
             },
             contrast: {
-                background: '{contrast.color}',
-                hoverBackground: '{contrast.hoverColor}',
-                activeBackground: '{contrast.activeColor}',
-                borderColor: '{contrast.color}',
-                hoverBorderColor: '{contrast.hoverColor}',
-                activeBorderColor: '{contrast.activeColor}',
-                color: '{contrast.contrastColor}',
-                hoverColor: '{contrast.contrastColor}',
-                activeColor: '{contrast.contrastColor}',
+                background: '{surface.950}',
+                hoverBackground: '{surface.900}',
+                activeBackground: '{surface.800}',
+                borderColor: '{surface.950}',
+                hoverBorderColor: '{surface.900}',
+                activeBorderColor: '{surface.800}',
+                color: '{surface.0}',
+                hoverColor: '{surface.0}',
+                activeColor: '{surface.0}',
                 focusRing: {
-                    color: '{contrast.color}',
+                    color: '{surface.950}',
                     shadow: 'none'
                 }
             }
         },
         outlined: {
             primary: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                borderColor: '{primary.color}',
+                hoverBackground: '{primary.50}',
+                activeBackground: '{primary.100}',
+                borderColor: '{primary.200}',
                 color: '{primary.color}'
             },
             secondary: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                borderColor: '{secondary.color}',
-                color: '{secondary.color}'
+                borderColor: '{surface.200}',
+                color: '{surface.500}'
             },
             success: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                borderColor: '{success.color}',
-                color: '{success.color}'
+                hoverBackground: '{success.50}',
+                activeBackground: '{success.100}',
+                borderColor: '{success.200}',
+                color: '{success.500}'
             },
             info: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                borderColor: '{info.color}',
-                color: '{info.color}'
+                hoverBackground: '{info.50}',
+                activeBackground: '{info.100}',
+                borderColor: '{info.200}',
+                color: '{info.500}'
             },
             warn: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                borderColor: '{warn.color}',
-                color: '{warn.color}'
+                hoverBackground: '{warn.50}',
+                activeBackground: '{warn.100}',
+                borderColor: '{warn.200}',
+                color: '{warn.500}'
             },
             help: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                borderColor: '{help.color}',
-                color: '{help.color}'
+                hoverBackground: '{help.50}',
+                activeBackground: '{help.100}',
+                borderColor: '{help.200}',
+                color: '{help.500}'
             },
             danger: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                borderColor: '{error.color}',
-                color: '{error.color}'
+                hoverBackground: '{error.50}',
+                activeBackground: '{error.100}',
+                borderColor: '{error.200}',
+                color: '{error.500}'
             },
             contrast: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                borderColor: '{contrast.color}',
-                color: '{contrast.color}'
+                borderColor: '{surface.700}',
+                color: '{surface.950}'
             },
             plain: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                borderColor: '{surface.border}',
-                color: '{text.color}'
+                borderColor: '{surface.200}',
+                color: '{surface.700}'
             }
         },
         text: {
             primary: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
+                hoverBackground: '{primary.50}',
+                activeBackground: '{primary.100}',
                 color: '{primary.color}'
             },
             secondary: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                color: '{secondary.color}'
+                color: '{surface.500}'
             },
             success: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                color: '{success.color}'
+                hoverBackground: '{success.50}',
+                activeBackground: '{success.100}',
+                color: '{success.500}'
             },
             info: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                color: '{info.color}'
+                hoverBackground: '{info.50}',
+                activeBackground: '{info.100}',
+                color: '{info.500}'
             },
             warn: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                color: '{warn.color}'
+                hoverBackground: '{warn.50}',
+                activeBackground: '{warn.100}',
+                color: '{warn.500}'
             },
             help: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                color: '{help.color}'
+                hoverBackground: '{help.50}',
+                activeBackground: '{help.100}',
+                color: '{help.500}'
             },
             danger: {
-                hoverBackground: '{surface.50}',
-                activeBackground: '{surface.100}',
-                color: '{error.color}'
+                hoverBackground: '{error.50}',
+                activeBackground: '{error.100}',
+                color: '{error.500}'
             },
             contrast: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                color: '{contrast.color}'
+                color: '{surface.950}'
             },
             plain: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                color: '{text.color}'
+                color: '{surface.700}'
             }
         },
         link: {
             color: '{primary.color}',
-            hoverColor: '{primary.hoverColor}',
-            activeColor: '{primary.activeColor}'
+            hoverColor: '{primary.color}',
+            activeColor: '{primary.color}'
         }
     },
     dark: {
         root: {
             primary: {
                 background: '{primary.color}',
-                hoverBackground: '{primary.hoverColor}',
-                activeBackground: '{primary.activeColor}',
+                hoverBackground: '{primary.hover.color}',
+                activeBackground: '{primary.active.color}',
                 borderColor: '{primary.color}',
-                hoverBorderColor: '{primary.hoverColor}',
-                activeBorderColor: '{primary.activeColor}',
-                color: '{primary.contrastColor}',
-                hoverColor: '{primary.contrastColor}',
-                activeColor: '{primary.contrastColor}',
+                hoverBorderColor: '{primary.hover.color}',
+                activeBorderColor: '{primary.active.color}',
+                color: '{primary.contrast.color}',
+                hoverColor: '{primary.contrast.color}',
+                activeColor: '{primary.contrast.color}',
                 focusRing: {
                     color: '{primary.color}',
                     shadow: 'none'
                 }
             },
             secondary: {
-                background: '{secondary.color}',
-                hoverBackground: '{secondary.hoverColor}',
-                activeBackground: '{secondary.activeColor}',
-                borderColor: '{secondary.color}',
-                hoverBorderColor: '{secondary.hoverColor}',
-                activeBorderColor: '{secondary.activeColor}',
-                color: '{secondary.contrastColor}',
-                hoverColor: '{secondary.contrastColor}',
-                activeColor: '{secondary.contrastColor}',
+                background: '{surface.800}',
+                hoverBackground: '{surface.700}',
+                activeBackground: '{surface.600}',
+                borderColor: '{surface.800}',
+                hoverBorderColor: '{surface.700}',
+                activeBorderColor: '{surface.600}',
+                color: '{surface.300}',
+                hoverColor: '{surface.200}',
+                activeColor: '{surface.100}',
                 focusRing: {
-                    color: '{secondary.color}',
+                    color: '{surface.300}',
                     shadow: 'none'
                 }
             },
             info: {
                 background: '{info.color}',
-                hoverBackground: '{info.hoverColor}',
-                activeBackground: '{info.activeColor}',
+                hoverBackground: '{info.hover.color}',
+                activeBackground: '{info.active.color}',
                 borderColor: '{info.color}',
-                hoverBorderColor: '{info.hoverColor}',
-                activeBorderColor: '{info.activeColor}',
-                color: '{info.contrastColor}',
-                hoverColor: '{info.contrastColor}',
-                activeColor: '{info.contrastColor}',
+                hoverBorderColor: '{info.hover.color}',
+                activeBorderColor: '{info.active.color}',
+                color: '{info.contrast.color}',
+                hoverColor: '{info.contrast.color}',
+                activeColor: '{info.contrast.color}',
                 focusRing: {
                     color: '{info.color}',
                     shadow: 'none'
@@ -343,14 +314,14 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             },
             success: {
                 background: '{success.color}',
-                hoverBackground: '{success.hoverColor}',
-                activeBackground: '{success.activeColor}',
+                hoverBackground: '{success.hover.color}',
+                activeBackground: '{success.active.color}',
                 borderColor: '{success.color}',
-                hoverBorderColor: '{success.hoverColor}',
-                activeBorderColor: '{success.activeColor}',
-                color: '{success.contrastColor}',
-                hoverColor: '{success.contrastColor}',
-                activeColor: '{success.contrastColor}',
+                hoverBorderColor: '{success.hover.color}',
+                activeBorderColor: '{success.active.color}',
+                color: '{success.contrast.color}',
+                hoverColor: '{success.contrast.color}',
+                activeColor: '{success.contrast.color}',
                 focusRing: {
                     color: '{success.color}',
                     shadow: 'none'
@@ -358,14 +329,14 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             },
             warn: {
                 background: '{warn.color}',
-                hoverBackground: '{warn.hoverColor}',
-                activeBackground: '{warn.activeColor}',
+                hoverBackground: '{warn.hover.color}',
+                activeBackground: '{warn.active.color}',
                 borderColor: '{warn.color}',
-                hoverBorderColor: '{warn.hoverColor}',
-                activeBorderColor: '{warn.activeColor}',
-                color: '{warn.contrastColor}',
-                hoverColor: '{warn.contrastColor}',
-                activeColor: '{warn.contrastColor}',
+                hoverBorderColor: '{warn.hover.color}',
+                activeBorderColor: '{warn.active.color}',
+                color: '{warn.contrast.color}',
+                hoverColor: '{warn.contrast.color}',
+                activeColor: '{warn.contrast.color}',
                 focusRing: {
                     color: '{warn.color}',
                     shadow: 'none'
@@ -373,14 +344,14 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             },
             help: {
                 background: '{help.color}',
-                hoverBackground: '{help.hoverColor}',
-                activeBackground: '{help.activeColor}',
+                hoverBackground: '{help.hover.color}',
+                activeBackground: '{help.active.color}',
                 borderColor: '{help.color}',
-                hoverBorderColor: '{help.hoverColor}',
-                activeBorderColor: '{help.activeColor}',
-                color: '{help.contrastColor}',
-                hoverColor: '{help.contrastColor}',
-                activeColor: '{help.contrastColor}',
+                hoverBorderColor: '{help.hover.color}',
+                activeBorderColor: '{help.active.color}',
+                color: '{help.contrast.color}',
+                hoverColor: '{help.contrast.color}',
+                activeColor: '{help.contrast.color}',
                 focusRing: {
                     color: '{help.color}',
                     shadow: 'none'
@@ -388,142 +359,142 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             },
             danger: {
                 background: '{error.color}',
-                hoverBackground: '{error.hoverColor}',
-                activeBackground: '{error.activeColor}',
+                hoverBackground: '{error.hover.color}',
+                activeBackground: '{error.active.color}',
                 borderColor: '{error.color}',
-                hoverBorderColor: '{error.hoverColor}',
-                activeBorderColor: '{error.activeColor}',
-                color: '{error.contrastColor}',
-                hoverColor: '{error.contrastColor}',
-                activeColor: '{error.contrastColor}',
+                hoverBorderColor: '{error.hover.color}',
+                activeBorderColor: '{error.active.color}',
+                color: '{error.contrast.color}',
+                hoverColor: '{error.contrast.color}',
+                activeColor: '{error.contrast.color}',
                 focusRing: {
                     color: '{error.color}',
                     shadow: 'none'
                 }
             },
             contrast: {
-                background: '{contrast.color}',
-                hoverBackground: '{contrast.hoverColor}',
-                activeBackground: '{contrast.activeColor}',
-                borderColor: '{contrast.color}',
-                hoverBorderColor: '{contrast.hoverColor}',
-                activeBorderColor: '{contrast.activeColor}',
-                color: '{contrast.contrastColor}',
-                hoverColor: '{contrast.contrastColor}',
-                activeColor: '{contrast.contrastColor}',
+                background: '{surface.0}',
+                hoverBackground: '{surface.100}',
+                activeBackground: '{surface.200}',
+                borderColor: '{surface.0}',
+                hoverBorderColor: '{surface.100}',
+                activeBorderColor: '{surface.200}',
+                color: '{surface.950}',
+                hoverColor: '{surface.950}',
+                activeColor: '{surface.950}',
                 focusRing: {
-                    color: '{contrast.color}',
+                    color: '{surface.0}',
                     shadow: 'none'
                 }
             }
         },
         outlined: {
             primary: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{primary.color}',
+                hoverBackground: 'color-mix(in srgb, {primary.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {primary.color}, transparent 84%)',
+                borderColor: '{primary.700}',
                 color: '{primary.color}'
             },
             secondary: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{secondary.color}',
-                color: '{secondary.color}'
+                hoverBackground: 'rgba(255,255,255,0.04)',
+                activeBackground: 'rgba(255,255,255,0.16)',
+                borderColor: '{surface.700}',
+                color: '{surface.400}'
             },
             success: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{success.color}',
+                hoverBackground: 'color-mix(in srgb, {success.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {success.color}, transparent 84%)',
+                borderColor: '{success.700}',
                 color: '{success.color}'
             },
             info: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{info.color}',
+                hoverBackground: 'color-mix(in srgb, {info.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {info.color}, transparent 84%)',
+                borderColor: '{info.700}',
                 color: '{info.color}'
             },
             warn: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{warn.color}',
+                hoverBackground: 'color-mix(in srgb, {warn.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {warn.color}, transparent 84%)',
+                borderColor: '{warn.700}',
                 color: '{warn.color}'
             },
             help: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{help.color}',
+                hoverBackground: 'color-mix(in srgb, {help.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {help.color}, transparent 84%)',
+                borderColor: '{help.700}',
                 color: '{help.color}'
             },
             danger: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{error.color}',
+                hoverBackground: 'color-mix(in srgb, {error.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {error.color}, transparent 84%)',
+                borderColor: '{error.700}',
                 color: '{error.color}'
             },
             contrast: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{contrast.color}',
-                color: '{contrast.color}'
+                hoverBackground: '{surface.800}',
+                activeBackground: '{surface.700}',
+                borderColor: '{surface.500}',
+                color: '{surface.0}'
             },
             plain: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                borderColor: '{surface.border}',
-                color: '{text.color}'
+                hoverBackground: '{surface.800}',
+                activeBackground: '{surface.700}',
+                borderColor: '{surface.600}',
+                color: '{surface.0}'
             }
         },
         text: {
             primary: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
+                hoverBackground: 'color-mix(in srgb, {primary.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {primary.color}, transparent 84%)',
                 color: '{primary.color}'
             },
             secondary: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                color: '{secondary.color}'
+                hoverBackground: '{surface.800}',
+                activeBackground: '{surface.700}',
+                color: '{surface.400}'
             },
             success: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
+                hoverBackground: 'color-mix(in srgb, {success.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {success.color}, transparent 84%)',
                 color: '{success.color}'
             },
             info: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
+                hoverBackground: 'color-mix(in srgb, {info.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {info.color}, transparent 84%)',
                 color: '{info.color}'
             },
             warn: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
+                hoverBackground: 'color-mix(in srgb, {warn.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {warn.color}, transparent 84%)',
                 color: '{warn.color}'
             },
             help: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
+                hoverBackground: 'color-mix(in srgb, {help.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {help.color}, transparent 84%)',
                 color: '{help.color}'
             },
             danger: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
+                hoverBackground: 'color-mix(in srgb, {error.color}, transparent 96%)',
+                activeBackground: 'color-mix(in srgb, {error.color}, transparent 84%)',
                 color: '{error.color}'
             },
             contrast: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                color: '{contrast.color}'
+                hoverBackground: '{surface.800}',
+                activeBackground: '{surface.700}',
+                color: '{surface.0}'
             },
             plain: {
-                hoverBackground: '{surface.300}',
-                activeBackground: '{surface.400}',
-                color: '{text.color}'
+                hoverBackground: '{surface.800}',
+                activeBackground: '{surface.700}',
+                color: '{surface.0}'
             }
         },
         link: {
             color: '{primary.color}',
-            hoverColor: '{primary.hoverColor}',
-            activeColor: '{primary.activeColor}'
+            hoverColor: '{primary.color}',
+            activeColor: '{primary.color}'
         }
     }
 };

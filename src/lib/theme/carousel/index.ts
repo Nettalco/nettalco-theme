@@ -33,6 +33,13 @@ export const colorScheme: CarouselTokenSections.ColorScheme = {
             hoverBackground: '{surface.300}',
             activeBackground: '{primary.color}'
         }
+    },
+    dark: {
+        indicator: {
+            background: '{surface.700}',
+            hoverBackground: '{surface.600}',
+            activeBackground: '{primary.color}'
+        }
     }
 };
 

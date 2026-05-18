@@ -24,39 +24,10 @@ export const footer: DrawerTokenSections.Footer = {
     padding: '{overlay.modal.padding}'
 };
 
-export const colorScheme: DrawerTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.200}',
-            color: '{surface.900}'
-        }
-    }
-};
-
-export const css: DrawerTokenSections.CSS = `
-.p-drawer-header {
-    background: var(--p-primary-color);
-    color: var(--p-primary-contrast-color);
-}
-.p-drawer-title {
-    color: var(--p-primary-contrast-color);
-}
-.p-drawer-header-icon {
-    color: var(--p-primary-contrast-color);
-}
-.p-drawer-header-icon:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--p-primary-contrast-color);
-}
-`;
-
 export default {
     root,
     header,
     title,
     content,
-    footer,
-    colorScheme,
-    css
+    footer
 } satisfies DrawerDesignTokens;

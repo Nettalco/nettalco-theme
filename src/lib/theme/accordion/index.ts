@@ -6,23 +6,23 @@ export const root: AccordionTokenSections.Root = {
 
 export const panel: AccordionTokenSections.Panel = {
     borderWidth: '0 0 1px 0',
-    borderColor: '{surface.border}'
+    borderColor: '{content.border.color}'
 };
 
 export const header: AccordionTokenSections.Header = {
-    color: '{primary.color}',
-    hoverColor: '{primary.color}',
-    activeColor: '{primary.color}',
-    activeHoverColor: '{primary.color}',
+    color: '{text.muted.color}',
+    hoverColor: '{text.color}',
+    activeColor: '{text.color}',
+    activeHoverColor: '{text.color}',
     padding: '1.125rem',
     fontWeight: '600',
     borderRadius: '0',
     borderWidth: '0',
-    borderColor: '{surface.border}',
+    borderColor: '{content.border.color}',
     background: '{content.background}',
-    hoverBackground: '{highlight.background}',
-    activeBackground: '{highlight.background}',
-    activeHoverBackground: '{highlight.background}',
+    hoverBackground: '{content.background}',
+    activeBackground: '{content.background}',
+    activeHoverBackground: '{content.background}',
     focusRing: {
         width: '{focus.ring.width}',
         style: '{focus.ring.style}',
@@ -31,10 +31,10 @@ export const header: AccordionTokenSections.Header = {
         shadow: '{focus.ring.shadow}'
     },
     toggleIcon: {
-        color: '{primary.color}',
-        hoverColor: '{primary.color}',
-        activeColor: '{primary.color}',
-        activeHoverColor: '{primary.color}'
+        color: '{text.muted.color}',
+        hoverColor: '{text.color}',
+        activeColor: '{text.color}',
+        activeHoverColor: '{text.color}'
     },
     first: {
         topBorderRadius: '{content.border.radius}',
@@ -48,8 +48,8 @@ export const header: AccordionTokenSections.Header = {
 
 export const content: AccordionTokenSections.Content = {
     borderWidth: '0',
-    borderColor: '{surface.border}',
-    background: '{highlight.background}',
+    borderColor: '{content.border.color}',
+    background: '{content.background}',
     color: '{text.color}',
     padding: '0 1.125rem 1.125rem 1.125rem'
 };

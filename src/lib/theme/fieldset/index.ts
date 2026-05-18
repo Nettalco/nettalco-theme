@@ -38,30 +38,9 @@ export const content: FieldsetTokenSections.Content = {
     padding: '0'
 };
 
-export const colorScheme: FieldsetTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            borderColor: '{surface.200}',
-            color: '{surface.700}'
-        },
-        legend: {
-            background: '{surface.0}',
-            hoverBackground: '{surface.50}',
-            color: '{surface.900}',
-            hoverColor: '{surface.900}'
-        },
-        toggleIcon: {
-            color: '{surface.500}',
-            hoverColor: '{surface.700}'
-        }
-    }
-};
-
 export default {
     root,
     legend,
     toggleIcon,
-    content,
-    colorScheme
+    content
 } satisfies FieldsetDesignTokens;

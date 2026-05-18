@@ -1,16 +1,5 @@
 import type { CardDesignTokens, CardTokenSections } from '@primeuix/themes/types/card';
 
-/**
- * Configuración de Card - Nettalco
- *
- * Colores del preset usados:
- * - Background: {surface.0} #ffffff
- * - Text color: {surface.900} #0f172a
- * - Subtitle: {surface.500} #64748b
- *
- * Solo light mode - sin dark mode.
- */
-
 export const root: CardTokenSections.Root = {
     background: '{content.background}',
     borderRadius: '{border.radius.xl}',
@@ -36,23 +25,10 @@ export const subtitle: CardTokenSections.Subtitle = {
     color: '{text.muted.color}'
 };
 
-export const colorScheme: CardTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{surface.0}',
-            color: '{surface.900}'
-        },
-        subtitle: {
-            color: '{surface.500}'
-        }
-    }
-};
-
 export default {
     root,
     body,
     caption,
     title,
-    subtitle,
-    colorScheme
+    subtitle
 } satisfies CardDesignTokens;

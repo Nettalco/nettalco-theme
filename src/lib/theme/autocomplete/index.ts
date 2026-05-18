@@ -1,15 +1,5 @@
 import type { AutoCompleteDesignTokens, AutoCompleteTokenSections } from '@primeuix/themes/types/autocomplete';
 
-/**
- * Configuración de AutoComplete - Nettalco
- *
- * Colores del preset usados:
- * - Chip focus: {primary.50}/{primary.500}
- * - Dropdown: surface tokens (fondos claros)
- *
- * Solo light mode - sin dark mode.
- */
-
 export const root: AutoCompleteTokenSections.Root = {
     background: '{form.field.background}',
     disabledBackground: '{form.field.disabled.background}',
@@ -102,8 +92,8 @@ export const emptyMessage: AutoCompleteTokenSections.EmptyMessage = {
 export const colorScheme: AutoCompleteTokenSections.ColorScheme = {
     light: {
         chip: {
-            focusBackground: '{primary.50}',
-            focusColor: '{primary.500}'
+            focusBackground: '{surface.200}',
+            focusColor: '{surface.800}'
         },
         dropdown: {
             background: '{surface.100}',
@@ -112,6 +102,20 @@ export const colorScheme: AutoCompleteTokenSections.ColorScheme = {
             color: '{surface.600}',
             hoverColor: '{surface.700}',
             activeColor: '{surface.800}'
+        }
+    },
+    dark: {
+        chip: {
+            focusBackground: '{surface.700}',
+            focusColor: '{surface.0}'
+        },
+        dropdown: {
+            background: '{surface.800}',
+            hoverBackground: '{surface.700}',
+            activeBackground: '{surface.600}',
+            color: '{surface.300}',
+            hoverColor: '{surface.200}',
+            activeColor: '{surface.100}'
         }
     }
 };

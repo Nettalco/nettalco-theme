@@ -8,7 +8,6 @@ declare const item: MenubarTokenSections.Item;
 declare const submenu: MenubarTokenSections.Submenu;
 declare const separator: MenubarTokenSections.Separator;
 declare const mobileButton: MenubarTokenSections.MobileButton;
-declare const colorScheme: MenubarTokenSections.ColorScheme;
 declare const _default: {
     root: MenubarTokenSections.Root;
     baseItem: MenubarTokenSections.BaseItem;
@@ -16,7 +15,6 @@ declare const _default: {
     submenu: MenubarTokenSections.Submenu;
     separator: MenubarTokenSections.Separator;
     mobileButton: MenubarTokenSections.MobileButton;
-    colorScheme: MenubarTokenSections.ColorScheme;
 };
 
-export { baseItem, colorScheme, _default as default, item, mobileButton, root, separator, submenu };
+export { baseItem, _default as default, item, mobileButton, root, separator, submenu };

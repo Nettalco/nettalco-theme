@@ -42,20 +42,10 @@ export const xl: AvatarTokenSections.Xl = {
     }
 };
 
-export const colorScheme: AvatarTokenSections.ColorScheme = {
-    light: {
-        root: {
-            background: '{primary.color}',
-            color: '{primary.contrast.color}'
-        }
-    }
-};
-
 export default {
     root,
     icon,
     group,
     lg,
-    xl,
-    colorScheme
+    xl
 } satisfies AvatarDesignTokens;
