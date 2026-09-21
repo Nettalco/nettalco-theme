@@ -46,7 +46,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{primary.contrast.color}',
                 activeColor: '{primary.contrast.color}',
                 focusRing: {
-                    color: '{primary.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -61,7 +61,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{surface.700}',
                 activeColor: '{surface.800}',
                 focusRing: {
-                    color: '{surface.600}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -76,7 +76,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{info.contrast.color}',
                 activeColor: '{info.contrast.color}',
                 focusRing: {
-                    color: '{info.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -91,7 +91,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{success.contrast.color}',
                 activeColor: '{success.contrast.color}',
                 focusRing: {
-                    color: '{success.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -106,7 +106,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{warn.contrast.color}',
                 activeColor: '{warn.contrast.color}',
                 focusRing: {
-                    color: '{warn.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -121,7 +121,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{help.contrast.color}',
                 activeColor: '{help.contrast.color}',
                 focusRing: {
-                    color: '{help.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -136,7 +136,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{error.contrast.color}',
                 activeColor: '{error.contrast.color}',
                 focusRing: {
-                    color: '{error.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -151,53 +151,59 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{surface.0}',
                 activeColor: '{surface.0}',
                 focusRing: {
-                    color: '{surface.950}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             }
         },
+        // DECISIÓN DE INTERFAZ. Aura pinta el borde del botón outlined con el
+        // nivel 200 (1,5-1,8:1 sobre blanco) y la etiqueta con el 500. El borde
+        // es lo único que identifica al botón, así que necesita 3:1 (WCAG
+        // 1.4.11) y sube al 500; la etiqueta necesita 4,5:1 y baja al 600.
+        // Sin esto, el outlined de "info" quedaba en 3,81:1 y el de "warn" en
+        // 3,23:1, ambos por debajo del mínimo para texto.
         outlined: {
             primary: {
                 hoverBackground: '{primary.50}',
                 activeBackground: '{primary.100}',
-                borderColor: '{primary.200}',
+                borderColor: '{primary.500}',
                 color: '{primary.color}'
             },
             secondary: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                borderColor: '{surface.200}',
-                color: '{surface.500}'
+                borderColor: '{surface.500}',
+                color: '{surface.600}'
             },
             success: {
                 hoverBackground: '{success.50}',
                 activeBackground: '{success.100}',
-                borderColor: '{success.200}',
-                color: '{success.500}'
+                borderColor: '{success.500}',
+                color: '{success.600}'
             },
             info: {
                 hoverBackground: '{info.50}',
                 activeBackground: '{info.100}',
-                borderColor: '{info.200}',
-                color: '{info.500}'
+                borderColor: '{info.500}',
+                color: '{info.600}'
             },
             warn: {
                 hoverBackground: '{warn.50}',
                 activeBackground: '{warn.100}',
-                borderColor: '{warn.200}',
-                color: '{warn.500}'
+                borderColor: '{warn.500}',
+                color: '{warn.600}'
             },
             help: {
                 hoverBackground: '{help.50}',
                 activeBackground: '{help.100}',
-                borderColor: '{help.200}',
-                color: '{help.500}'
+                borderColor: '{help.500}',
+                color: '{help.600}'
             },
             danger: {
                 hoverBackground: '{error.50}',
                 activeBackground: '{error.100}',
-                borderColor: '{error.200}',
-                color: '{error.500}'
+                borderColor: '{error.500}',
+                color: '{error.600}'
             },
             contrast: {
                 hoverBackground: '{surface.50}',
@@ -208,7 +214,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             plain: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                borderColor: '{surface.200}',
+                borderColor: '{surface.500}',
                 color: '{surface.700}'
             }
         },
@@ -218,35 +224,37 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 activeBackground: '{primary.100}',
                 color: '{primary.color}'
             },
+            // DECISIÓN DE INTERFAZ: mismo motivo que en outlined, la etiqueta
+            // del botón de texto baja del nivel 500 al 600 para llegar a 4,5:1.
             secondary: {
                 hoverBackground: '{surface.50}',
                 activeBackground: '{surface.100}',
-                color: '{surface.500}'
+                color: '{surface.600}'
             },
             success: {
                 hoverBackground: '{success.50}',
                 activeBackground: '{success.100}',
-                color: '{success.500}'
+                color: '{success.600}'
             },
             info: {
                 hoverBackground: '{info.50}',
                 activeBackground: '{info.100}',
-                color: '{info.500}'
+                color: '{info.600}'
             },
             warn: {
                 hoverBackground: '{warn.50}',
                 activeBackground: '{warn.100}',
-                color: '{warn.500}'
+                color: '{warn.600}'
             },
             help: {
                 hoverBackground: '{help.50}',
                 activeBackground: '{help.100}',
-                color: '{help.500}'
+                color: '{help.600}'
             },
             danger: {
                 hoverBackground: '{error.50}',
                 activeBackground: '{error.100}',
-                color: '{error.500}'
+                color: '{error.600}'
             },
             contrast: {
                 hoverBackground: '{surface.50}',
@@ -278,7 +286,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{primary.contrast.color}',
                 activeColor: '{primary.contrast.color}',
                 focusRing: {
-                    color: '{primary.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -293,7 +301,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{surface.200}',
                 activeColor: '{surface.100}',
                 focusRing: {
-                    color: '{surface.300}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -308,7 +316,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{info.contrast.color}',
                 activeColor: '{info.contrast.color}',
                 focusRing: {
-                    color: '{info.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -323,7 +331,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{success.contrast.color}',
                 activeColor: '{success.contrast.color}',
                 focusRing: {
-                    color: '{success.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -338,7 +346,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{warn.contrast.color}',
                 activeColor: '{warn.contrast.color}',
                 focusRing: {
-                    color: '{warn.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -353,7 +361,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{help.contrast.color}',
                 activeColor: '{help.contrast.color}',
                 focusRing: {
-                    color: '{help.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -368,7 +376,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{error.contrast.color}',
                 activeColor: '{error.contrast.color}',
                 focusRing: {
-                    color: '{error.color}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             },
@@ -383,7 +391,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 hoverColor: '{surface.950}',
                 activeColor: '{surface.950}',
                 focusRing: {
-                    color: '{surface.0}',
+                    color: '{focus.ring.color}',
                     shadow: 'none'
                 }
             }
