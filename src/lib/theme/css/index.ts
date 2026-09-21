@@ -24,6 +24,18 @@ const css = /*css*/ `
     .p-treetable thead.p-treetable-thead>tr>th {
         transition: none;
     }
+
+    /*
+     * DECISIÓN DE INTERFAZ — no es estética, es WCAG 1.4.1.
+     * Aura solo subraya el botón de enlace al pasar el ratón, así que en reposo
+     * lo único que lo distingue del texto es el color. Y ningún color lo
+     * resuelve solo: cumplir 4,5:1 sobre blanco exige luminancia <= 0,1833 y
+     * despegarse 3:1 del texto base exige >= 0,1993, que es incompatible. El
+     * subrayado permanente aporta el indicio no cromático que falta.
+     */
+    .p-button-link .p-button-label {
+        text-decoration: underline;
+    }
 `;
 
 export default css satisfies ExtendedCSS;

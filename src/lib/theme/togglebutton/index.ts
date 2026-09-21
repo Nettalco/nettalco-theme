@@ -50,7 +50,7 @@ export const colorScheme: ToggleButtonTokenSections.ColorScheme = {
             checkedBackground: '{surface.100}',
             hoverBackground: '{surface.100}',
             borderColor: '{surface.100}',
-            color: '{surface.500}',
+            color: '{surface.600}',
             hoverColor: '{surface.700}',
             checkedColor: '{surface.900}',
             checkedBorderColor: '{surface.100}'
@@ -59,7 +59,7 @@ export const colorScheme: ToggleButtonTokenSections.ColorScheme = {
             checkedBackground: '{surface.0}'
         },
         icon: {
-            color: '{surface.500}',
+            color: '{surface.600}',
             hoverColor: '{surface.700}',
             checkedColor: '{surface.900}'
         }

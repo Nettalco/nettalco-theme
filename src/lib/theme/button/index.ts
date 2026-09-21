@@ -267,10 +267,19 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 color: '{surface.700}'
             }
         },
+        // DECISIÓN DE INTERFAZ. El enlace NO puede ser {primary.color}: el azul
+        // oscuro de marca contra el texto base #333333 da 1,20:1, o sea que un
+        // enlace dentro de un párrafo solo se distinguiría por su posición.
+        // Se usa el azul claro de marca oscurecido hasta cumplir sobre blanco
+        // (secondary.600 = #2558E4, 5,84:1).
+        // Ningún color resuelve esto solo: cumplir 4,5:1 sobre blanco exige
+        // luminancia <= 0,1833 y despegarse 3:1 del texto exige >= 0,1993. Por
+        // eso el subrayado en reposo es obligatorio, no decorativo; se añade en
+        // css/index.ts porque Aura solo subraya al pasar el ratón (WCAG 1.4.1).
         link: {
-            color: '{primary.color}',
-            hoverColor: '{primary.color}',
-            activeColor: '{primary.color}'
+            color: '{nettalcoSecondary.600}',
+            hoverColor: '{nettalcoSecondary.700}',
+            activeColor: '{nettalcoSecondary.800}'
         }
     },
     dark: {
@@ -396,47 +405,52 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 }
             }
         },
+        // DECISIÓN DE INTERFAZ. En oscuro el borde venía del extremo OSCURO de
+        // cada rampa ({X.700}), que sobre surface.900 daba entre 1,00:1 (el
+        // primario: borde literalmente invisible) y 2,54:1. En modo oscuro el
+        // borde tiene que salir del extremo CLARO, así que se usa el mismo
+        // color de relleno del esquema, {X.color}: de 6,08:1 a 13,02:1.
         outlined: {
             primary: {
                 hoverBackground: 'color-mix(in srgb, {primary.color}, transparent 96%)',
                 activeBackground: 'color-mix(in srgb, {primary.color}, transparent 84%)',
-                borderColor: '{primary.700}',
+                borderColor: '{primary.color}',
                 color: '{primary.color}'
             },
             secondary: {
                 hoverBackground: 'rgba(255,255,255,0.04)',
                 activeBackground: 'rgba(255,255,255,0.16)',
-                borderColor: '{surface.700}',
+                borderColor: '{surface.400}',
                 color: '{surface.400}'
             },
             success: {
                 hoverBackground: 'color-mix(in srgb, {success.color}, transparent 96%)',
                 activeBackground: 'color-mix(in srgb, {success.color}, transparent 84%)',
-                borderColor: '{success.700}',
+                borderColor: '{success.color}',
                 color: '{success.color}'
             },
             info: {
                 hoverBackground: 'color-mix(in srgb, {info.color}, transparent 96%)',
                 activeBackground: 'color-mix(in srgb, {info.color}, transparent 84%)',
-                borderColor: '{info.700}',
+                borderColor: '{info.color}',
                 color: '{info.color}'
             },
             warn: {
                 hoverBackground: 'color-mix(in srgb, {warn.color}, transparent 96%)',
                 activeBackground: 'color-mix(in srgb, {warn.color}, transparent 84%)',
-                borderColor: '{warn.700}',
+                borderColor: '{warn.color}',
                 color: '{warn.color}'
             },
             help: {
                 hoverBackground: 'color-mix(in srgb, {help.color}, transparent 96%)',
                 activeBackground: 'color-mix(in srgb, {help.color}, transparent 84%)',
-                borderColor: '{help.700}',
+                borderColor: '{help.color}',
                 color: '{help.color}'
             },
             danger: {
                 hoverBackground: 'color-mix(in srgb, {error.color}, transparent 96%)',
                 activeBackground: 'color-mix(in srgb, {error.color}, transparent 84%)',
-                borderColor: '{error.700}',
+                borderColor: '{error.color}',
                 color: '{error.color}'
             },
             contrast: {
@@ -448,7 +462,7 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
             plain: {
                 hoverBackground: '{surface.800}',
                 activeBackground: '{surface.700}',
-                borderColor: '{surface.600}',
+                borderColor: '{surface.400}',
                 color: '{surface.0}'
             }
         },
@@ -499,10 +513,12 @@ export const colorScheme: ButtonTokenSections.ColorScheme = {
                 color: '{surface.0}'
             }
         },
+        // Mismo criterio que en claro: el enlace se despega del texto.
+        // secondary.300 sobre surface.900 = 8,05:1.
         link: {
-            color: '{primary.color}',
-            hoverColor: '{primary.color}',
-            activeColor: '{primary.color}'
+            color: '{nettalcoSecondary.300}',
+            hoverColor: '{nettalcoSecondary.200}',
+            activeColor: '{nettalcoSecondary.100}'
         }
     }
 };

@@ -21,6 +21,10 @@ valores críticos están además **verificados en navegador** sobre componentes 
 | Éxito / aviso / info | cianes y naranjas que no están en el manual | derivados del manual donde tiene sentido |
 | Severidad "help" | **violeta** `#8B5CF6` | verde azulado `#176973` del manual |
 | Modo oscuro | rampa de superficies invertida: el texto atenuado era ilegible | rampa corregida, texto atenuado a 5,40:1 |
+| Color de enlace | el primario: 1,20:1 contra el texto que lo rodea | `#2558E4` + subrayado permanente |
+| Hover/pulsado del primario | oscurecían: 1,10:1 y 1,16:1, imperceptibles | aclaran: 1,35:1 y 1,49:1 |
+| Bordes `outlined` en oscuro | `{X.700}`, entre 1,00:1 y 2,54:1 | `{X.color}`, entre 6,08:1 y 13,02:1 |
+| Texto de Message/Toast en oscuro | `{X.500}`, entre 2,95:1 y 4,47:1 | `{X.color}`, entre 5,60:1 y 8,69:1 |
 
 ---
 
@@ -39,7 +43,7 @@ Traducción al vocabulario de PrimeNG:
 | **Acento / `info` / enlaces** | familia de **#4A7AFF** | Segundo en jerarquía. Ojo: el valor puro no vale como texto (§3). Para texto se usa su nivel 600, `#2558E4`. |
 | **Texto sobre azul oscuro** | **#B7CAFF** lavanda | 9,32:1 sobre el navy. Resulta ser el mismo tono y saturación que #4A7AFF, solo más claro: encaja como nivel 200 de esa misma rampa. |
 | **`success`** | familia del **verde menta #A2F0A1** | El menta solo puede ser el nivel 200 (§5). |
-| **`help`** | **#176973** verde azulado | Único acento del manual que aguanta texto sobre blanco (6,35:1). Sustituye al violeta de Aura, ajeno a la marca. |
+| **`help`** | **#176973** verde azulado | Único acento del manual que aguanta texto sobre blanco (6,35:1). Sustituye al violeta `#8B5CF6` que traía este preset (Aura no define `help`). |
 | **Neutros** | **#E6E6E6** y **#7A7A7A** | Anclas de la escala de grises (§6). |
 
 ### Decisión que tomé y conviene saber
@@ -72,16 +76,21 @@ Está construida así a propósito:
 | 300 | `#818BDA` | acento sobre fondo oscuro |
 | 400 | `#3542B6` | intermedio |
 | **500** | **`#1C224D`** | **el color de marca**: botón primario, borde, `primary.color` |
-| 600 | `#161A43` | hover del primario |
-| 700 | `#121538` | pulsado; **texto sobre el 50** (15,83:1) |
+| 600 | `#161A43` | tintes oscuros; ya NO es el hover (ver abajo) |
+| 700 | `#121538` | **texto sobre el 50** (15,83:1) |
 | 800 | `#0D0F2D` | **texto sobre el 100** (14,05:1) |
 | 900 | `#090B22` | fondos oscuros |
 | 950 | `#060616` | fondos oscuros |
 
 Oscurece de forma monótona en los 11 niveles (comprobado calculando la luminancia relativa de
 cada uno). La mitad clara lleva pasos grandes porque tiene que cubrir de 96% a 21% de
-luminosidad; la mitad oscura lleva pasos de ~3 puntos, suficientes para que hover y pulsado se
-distingan sin salirse del azul de marca.
+luminosidad; la mitad oscura lleva pasos de ~3 puntos.
+
+**Lo que la mitad oscura NO puede dar es el hover.** Con el 500 ya en luminancia 0,019, bajar
+al 600 o al 700 produce cambios de 1,10:1 y 1,16:1: el usuario no percibe respuesta al pasar el
+ratón ni al pulsar (Aura llega a 1,49:1 y 1,46:1 porque su primario es un verde medio). Por eso
+el hover y el pulsado **aclaran** mezclando hacia el 400: `#293282` (1,35:1) y `#2C3791`
+(1,49:1), ambos con el texto blanco por encima de 9:1. Está en la lista de §9.
 
 ---
 
@@ -129,13 +138,39 @@ Todos marcados en el código con `// DECISIÓN DE INTERFAZ`.
 - **Error** — **no hay derivación posible**: ningún color de marca puede significar "error" sin
   confundirse con los azules. Rojo elegido por accesibilidad: `#CE272F` con texto blanco
   (5,31:1); texto de error `#92161C` (8,92:1).
-- **Aviso** — tampoco hay derivación. Ámbar `#CE7C09`. **Aviso importante**: ningún ámbar lo
-  bastante luminoso para leerse como "aviso" admite texto blanco (blanco sobre él da 3,23:1).
-  Por eso el botón de aviso lleva **texto oscuro** (`#321606`, 5,20:1) y su **hover aclara** en
-  vez de oscurecer, para no perder ese contraste. Es deliberado.
+- **Aviso** — tampoco hay derivación. Ámbar. El relleno del botón es el **600 `#AB5F07`** con
+  **texto blanco** (4,80:1), y el hover oscurece al 700 (6,93:1) como el resto de severidades.
+  El nivel 500 `#CE7C09` **no** admite texto blanco (3,23:1), así que el relleno no puede ser
+  ese; el 500 sí vale como borde (3,23:1 ≥ 3) y el 700 como texto sobre blanco (6,93:1).
+  El precio es un ámbar más apagado que el amarillo-naranja brillante habitual en avisos;
+  está en la lista de §9 por si diseño prefiere el brillo al convenio.
+
+  *Corrección respecto a la primera versión de este informe*: allí escribí que "ningún ámbar lo
+  bastante luminoso para leerse como aviso admite texto blanco". **Era falso** y lo desmiente
+  la propia rampa: `warn.600` da 4,80:1 con blanco y `warn.700` da 6,93:1. La versión anterior
+  ponía texto oscuro sobre el 500 y hacía que el hover aclarase; se ha revertido a la
+  convención normal.
 - **Información** — reutiliza la rampa del azul claro del manual en vez de inventar un tercer
   azul que competiría con los dos de la marca.
 - **Ayuda** — `#176973`, el verde azulado del manual, que antes no se usaba en ningún sitio.
+
+### El color de enlace, y por qué va subrayado
+
+El botón de enlace usaba `{primary.color}`. Contra el texto base `#333333` eso da **1,20:1**:
+un enlace dentro de un párrafo solo se reconocía por su posición, que es exactamente lo que
+WCAG 1.4.1 no permite. Es consecuencia directa de que el primario de marca sea un navy casi
+negro, muy parecido al color del texto.
+
+Ahora el enlace es **`#2558E4`** (el azul claro de marca oscurecido hasta cumplir sobre blanco:
+5,84:1) y en oscuro `#8FADFF` (8,05:1).
+
+Eso no basta por sí solo, y conviene entender por qué: para que el color distinga al enlace sin
+más ayuda haría falta 3:1 **contra el texto que lo rodea**, y a la vez 4,5:1 **contra el fondo**.
+Las dos condiciones son incompatibles: la primera exige luminancia ≥ 0,1993 y la segunda
+≤ 0,1833. **Ningún color existe en ese hueco.** Por eso el enlace lleva **subrayado permanente**,
+añadido en `css/index.ts`: Aura solo subraya al pasar el ratón, lo que deja el estado de reposo
+dependiendo únicamente del color. El subrayado es el indicio no cromático que exige la norma,
+no un adorno.
 
 ---
 
@@ -162,11 +197,13 @@ ambos por debajo del 3:1 que exige WCAG 1.4.11. Corregido.
 ## 7. Tabla de contrastes
 
 Mínimos aplicados: **4,5:1** texto normal · **3:1** texto grande y elementos de interfaz
-(bordes, iconos, anillos de foco) · las filas marcadas **n/a** son elementos decorativos,
-exentos del criterio 1.4.11.
+(bordes, iconos, anillos de foco) · las filas marcadas **n/a** o **informativo** son elementos
+decorativos o comparaciones que se documentan pero no son criterio de conformidad.
 
 Las filas que empiezan por **NO:** o **HOY:** están puestas a propósito para documentar un uso
-que **no** hay que hacer (o lo que falla hoy); su "No cumple" es el resultado esperado.
+que **no** hay que hacer (o lo que fallaba antes); su "No cumple" es el resultado esperado.
+
+### 7.1 Pares de la paleta, calculados
 
 **1. Primario de marca (#1C224D)**
 
@@ -230,8 +267,10 @@ que **no** hay que hacer (o lo que falla hoy); su "No cumple" es el resultado es
 | Texto de error: error.700 sobre blanco | `#92161C` sobre `#FFFFFF` | **8.92:1** | 4.5 | Cumple |
 | Mensaje de error: error.700 sobre error.50 | `#92161C` sobre `#FEF1F1` | **8.10:1** | 4.5 | Cumple |
 | Borde de campo invalido error.500 sobre blanco | `#CE272F` sobre `#FFFFFF` | **5.31:1** | 3 | Cumple |
-| Texto warn.950 sobre warn.500 (boton aviso lleva texto oscuro) | `#321606` sobre `#CE7C09` | **5.20:1** | 4.5 | Cumple |
-| NO: blanco sobre warn.500 (por eso el texto del boton es oscuro) | `#FFFFFF` sobre `#CE7C09` | **3.23:1** | 4.5 | No cumple |
+| NO: blanco sobre warn.500 (por eso el relleno NO es el 500) | `#FFFFFF` sobre `#CE7C09` | **3.23:1** | 4.5 | No cumple |
+| SI: blanco sobre warn.600 = el boton de aviso | `#FFFFFF` sobre `#AB5F07` | **4.80:1** | 4.5 | Cumple |
+| Blanco sobre warn.700 (hover, oscurece como el resto) | `#FFFFFF` sobre `#8B4809` | **6.93:1** | 4.5 | Cumple |
+| Blanco sobre warn.800 (pulsado) | `#FFFFFF` sobre `#6F370B` | **9.43:1** | 4.5 | Cumple |
 | Texto de aviso: warn.700 sobre blanco | `#8B4809` sobre `#FFFFFF` | **6.93:1** | 4.5 | Cumple |
 | Mensaje de aviso: warn.700 sobre warn.50 | `#8B4809` sobre `#FEFAEB` | **6.63:1** | 4.5 | Cumple |
 | Blanco sobre success.500 (boton exito) | `#FFFFFF` sobre `#228732` | **4.59:1** | 4.5 | Cumple |
@@ -268,37 +307,197 @@ que **no** hay que hacer (o lo que falla hoy); su "No cumple" es el resultado es
 | Texto secondary.200 sobre fila seleccionada #1F2D4A | `#B7CAFF` sobre `#1F2D4A` | **8.42:1** | 4.5 | Cumple |
 | Texto secondary.100 sobre fila seleccionada+foco #26365C | `#DBE5FF` sobre `#26365C` | **9.44:1** | 4.5 | Cumple |
 
+**7. Enlaces y estados del primario**
+
+| Par color / fondo | Muestra | Ratio | Mínimo | Resultado |
+|---|---|---|---|---|
+| NO: enlace {primary.color} frente al texto base (indistinguible) | `#1C224D` sobre `#333333` | **1.20:1** | 3 | No cumple |
+| SI: enlace secondary.600 sobre blanco | `#2558E4` sobre `#FFFFFF` | **5.84:1** | 4.5 | Cumple |
+| Enlace secondary.600 frente al texto base: ningun color llega a 3:1 aqui, por eso el subrayado | `#2558E4` sobre `#333333` | **2.16:1** | — | n/a |
+| Enlace en oscuro: secondary.300 sobre surface.900 | `#8FADFF` sobre `#101928` | **8.05:1** | 4.5 | Cumple |
+| NO: hover oscureciendo al 600 (imperceptible) | `#161A43` sobre `#1C224D` | **1.10:1** | 1.4 | No cumple |
+| NO: pulsado oscureciendo al 700 (imperceptible) | `#121538` sobre `#1C224D` | **1.16:1** | 1.4 | No cumple |
+| SI: hover aclarando #293282 frente al 500 | `#293282` sobre `#1C224D` | **1.35:1** | 1.3 | Cumple |
+| SI: pulsado aclarando #2C3791 frente al 500 | `#2C3791` sobre `#1C224D` | **1.49:1** | 1.45 | Cumple |
+| Blanco sobre el hover #293282 | `#FFFFFF` sobre `#293282` | **11.21:1** | 4.5 | Cumple |
+| Blanco sobre el pulsado #2C3791 | `#FFFFFF` sobre `#2C3791` | **10.18:1** | 4.5 | Cumple |
+
 **Fallos no esperados: 0.**
 
-### Verificación en navegador
+### 7.2 Medido en el navegador, sobre componentes PrimeNG reales
 
-No me quedé en el cálculo. Se generó una página con el **CSS real de PrimeNG**
-(`@primeuix/styles`) resuelto contra este preset — botones de las 8 severidades en sus 3
-variantes, campos de formulario (normal, con foco, inválido, deshabilitado), mensajes, tabla
-con fila seleccionada y etiquetas, y menú — y se midieron los colores **efectivamente
-renderizados** con Playwright, en modo claro, sobre el azul oscuro y en modo oscuro.
+Esta es la verificación que importa, y en la primera versión de este informe **no estaba
+completa**: la página de prueba no incluía mensajes ni botones `outlined` en modo oscuro, así
+que el "modo oscuro verificado" que afirmé no estaba respaldado. Lo estaba solo el modo claro.
+Rehecha, la comprobación ahora cubre los dos modos con los mismos componentes.
 
-Los valores medidos coinciden exactamente con los calculados. Muestra:
+Cómo está montada, para que se pueda repetir:
 
-| Medido en navegador | Color / fondo | Ratio |
-|---|---|---|
-| Botón primario (claro) | `#FFFFFF` sobre `#1C224D` | 15,16:1 |
-| Botón de aviso (claro) | `#321606` sobre `#CE7C09` | 5,20:1 |
-| Botón "help" (claro) | `#FFFFFF` sobre `#176973` | 6,35:1 |
-| Texto de celda de tabla | `#333333` sobre `#FFFFFF` | 12,63:1 |
-| Fila seleccionada | `#121538` sobre `#F1F2FB` | 15,83:1 |
-| Etiqueta atenuada | `#616161` sobre `#FFFFFF` | 6,19:1 |
-| Enlace en barra lateral azul | `#B7CAFF` sobre `#1C224D` | 9,32:1 |
-| Botón de éxito (oscuro) | `#071D0E` sobre `#A2F0A1` | 13,03:1 |
-| Anillo de foco sobre azul oscuro (Tab real) | `#4A7AFF` sobre `#1C224D` | 3,98:1 |
+- Se resuelve el preset compilado con el motor real de PrimeNG y se extrae el **CSS real de los
+  componentes** (`@primeuix/styles`), sus variables por componente y el bloque `css` del propio
+  preset.
+- Una sola página con botones de las 8 severidades en sus 3 variantes, campos (normal, foco,
+  inválido, deshabilitado, grupo con addon, togglebutton), enlace dentro de un párrafo,
+  Message normal y `outlined`, InlineMessage, Toast, tabla con fila seleccionada y menú.
+- Se mide con Playwright el color **realmente pintado**, componiendo la transparencia de los
+  `color-mix` contra el fondo efectivo de cada ancestro.
+- El modo oscuro se activa con `.p-dark` en el **elemento raíz** y **se mide en una llamada
+  aparte**: hacerlo en el mismo turno que el cambio de clase devuelve valores del modo claro y
+  fue justo lo que enmascaró el problema la primera vez.
 
-Nota de método: el modo oscuro se verificó con `.p-dark` en el **elemento raíz**, que es como
-lo documenta la propia librería (`document.documentElement.classList.toggle('p-dark')`).
-Aplicado a un `div` intermedio no funciona, porque las variables de componente se declaran en
-`:root` y el navegador sustituye ahí los `var()` anidados. No es un defecto del tema, pero
-conviene saberlo si alguien intenta previsualizar los dos modos en la misma página.
+#### Modo claro — 70 comprobaciones
 
----
+| Elemento | Medido en el navegador | Ratio | Mín | |
+|---|---|---|---|---|
+| boton solido · primary | `#FFFFFF` sobre `#1C224D` | **15.16:1** | 4.5 | Cumple |
+| boton outlined · primary | `#1C224D` sobre `#FFFFFF` | **15.16:1** | 4.5 | Cumple |
+| BORDE outlined · primary | `#1C224D` sobre `#FFFFFF` | **15.16:1** | 3 | Cumple |
+| boton texto · primary | `#1C224D` sobre `#FFFFFF` | **15.16:1** | 4.5 | Cumple |
+| boton solido · secondary | `#616161` sobre `#F2F2F2` | **5.53:1** | 4.5 | Cumple |
+| boton outlined · secondary | `#616161` sobre `#FFFFFF` | **6.19:1** | 4.5 | Cumple |
+| BORDE outlined · secondary | `#7A7A7A` sobre `#FFFFFF` | **4.29:1** | 3 | Cumple |
+| boton texto · secondary | `#616161` sobre `#FFFFFF` | **6.19:1** | 4.5 | Cumple |
+| boton solido · success | `#FFFFFF` sobre `#228732` | **4.59:1** | 4.5 | Cumple |
+| boton outlined · success | `#176D28` sobre `#FFFFFF` | **6.45:1** | 4.5 | Cumple |
+| BORDE outlined · success | `#228732` sobre `#FFFFFF` | **4.59:1** | 3 | Cumple |
+| boton texto · success | `#176D28` sobre `#FFFFFF` | **6.45:1** | 4.5 | Cumple |
+| boton solido · info | `#FFFFFF` sobre `#2558E4` | **5.84:1** | 4.5 | Cumple |
+| boton outlined · info | `#2558E4` sobre `#FFFFFF` | **5.84:1** | 4.5 | Cumple |
+| BORDE outlined · info | `#4A7AFF` sobre `#FFFFFF` | **3.81:1** | 3 | Cumple |
+| boton texto · info | `#2558E4` sobre `#FFFFFF` | **5.84:1** | 4.5 | Cumple |
+| boton solido · warn | `#FFFFFF` sobre `#AB5F07` | **4.8:1** | 4.5 | Cumple |
+| boton outlined · warn | `#AB5F07` sobre `#FFFFFF` | **4.8:1** | 4.5 | Cumple |
+| BORDE outlined · warn | `#CE7C09` sobre `#FFFFFF` | **3.23:1** | 3 | Cumple |
+| boton texto · warn | `#AB5F07` sobre `#FFFFFF` | **4.8:1** | 4.5 | Cumple |
+| boton solido · help | `#FFFFFF` sobre `#176973` | **6.35:1** | 4.5 | Cumple |
+| boton outlined · help | `#176973` sobre `#FFFFFF` | **6.35:1** | 4.5 | Cumple |
+| BORDE outlined · help | `#1F7884` sobre `#FFFFFF` | **5.15:1** | 3 | Cumple |
+| boton texto · help | `#176973` sobre `#FFFFFF` | **6.35:1** | 4.5 | Cumple |
+| boton solido · danger | `#FFFFFF` sobre `#CE272F` | **5.31:1** | 4.5 | Cumple |
+| boton outlined · danger | `#AF1D24` sobre `#FFFFFF` | **6.94:1** | 4.5 | Cumple |
+| BORDE outlined · danger | `#CE272F` sobre `#FFFFFF` | **5.31:1** | 3 | Cumple |
+| boton texto · danger | `#AF1D24` sobre `#FFFFFF` | **6.94:1** | 4.5 | Cumple |
+| boton solido · contrast | `#FFFFFF` sobre `#121212` | **18.73:1** | 4.5 | Cumple |
+| boton outlined · contrast | `#121212` sobre `#FFFFFF` | **18.73:1** | 4.5 | Cumple |
+| BORDE outlined · contrast | `#4A4A4A` sobre `#FFFFFF` | **8.86:1** | 3 | Cumple |
+| boton texto · contrast | `#121212` sobre `#FFFFFF` | **18.73:1** | 4.5 | Cumple |
+| message · error | `#AF1D24` sobre `#FEF2F2` | **6.34:1** | 4.5 | Cumple |
+| message outlined · error | `#AF1D24` sobre `#FFFFFF` | **6.94:1** | 4.5 | Cumple |
+| message · warn | `#AB5F07` sobre `#FEFAEC` | **4.61:1** | 4.5 | Cumple |
+| message outlined · warn | `#AB5F07` sobre `#FFFFFF` | **4.8:1** | 4.5 | Cumple |
+| message · success | `#176D28` sobre `#EAFBEA` | **6:1** | 4.5 | Cumple |
+| message outlined · success | `#176D28` sobre `#FFFFFF` | **6.45:1** | 4.5 | Cumple |
+| message · info | `#2558E4` sobre `#F1F5FF` | **5.34:1** | 4.5 | Cumple |
+| message outlined · info | `#2558E4` sobre `#FFFFFF` | **5.84:1** | 4.5 | Cumple |
+| message · secondary | `#616161` sobre `#F2F2F2` | **5.53:1** | 4.5 | Cumple |
+| message outlined · secondary | `#616161` sobre `#FFFFFF` | **6.19:1** | 4.5 | Cumple |
+| message · contrast | `#FAFAFA` sobre `#1F1F1F` | **15.79:1** | 4.5 | Cumple |
+| message outlined · contrast | `#121212` sobre `#FFFFFF` | **18.73:1** | 4.5 | Cumple |
+| inlinemessage · error | `#AF1D24` sobre `#FEF2F2` | **6.34:1** | 4.5 | Cumple |
+| toast · error resumen | `#AF1D24` sobre `#FEF2F2` | **6.34:1** | 4.5 | Cumple |
+| toast · error detalle | `#4A4A4A` sobre `#FEF2F2` | **8.09:1** | 4.5 | Cumple |
+| inlinemessage · warn | `#AB5F07` sobre `#FEFAEC` | **4.61:1** | 4.5 | Cumple |
+| toast · warn resumen | `#AB5F07` sobre `#FEFAEC` | **4.61:1** | 4.5 | Cumple |
+| toast · warn detalle | `#4A4A4A` sobre `#FEFAEC` | **8.5:1** | 4.5 | Cumple |
+| inlinemessage · success | `#176D28` sobre `#EAFBEA` | **6:1** | 4.5 | Cumple |
+| toast · success resumen | `#176D28` sobre `#EAFBEA` | **6:1** | 4.5 | Cumple |
+| toast · success detalle | `#4A4A4A` sobre `#EAFBEA` | **8.24:1** | 4.5 | Cumple |
+| inlinemessage · info | `#2558E4` sobre `#F1F5FF` | **5.34:1** | 4.5 | Cumple |
+| toast · info resumen | `#2558E4` sobre `#F1F5FF` | **5.34:1** | 4.5 | Cumple |
+| toast · info detalle | `#4A4A4A` sobre `#F1F5FF` | **8.1:1** | 4.5 | Cumple |
+| tabla · celda | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
+| tabla · cabecera | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
+| tabla · fila seleccionada | `#121538` sobre `#F1F2FB` | **15.83:1** | 4.5 | Cumple |
+| formulario · input | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
+| formulario · etiqueta atenuada 13.6px | `#616161` sobre `#FFFFFF` | **6.19:1** | 4.5 | Cumple |
+| formulario · texto de error 12.8px | `#92161C` sobre `#FFFFFF` | **8.92:1** | 4.5 | Cumple |
+| formulario · addon inputgroup | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
+| formulario · togglebutton | `#616161` sobre `#F2F2F2` | **5.53:1** | 4.5 | Cumple |
+| BORDE campo · input | `#7A7A7A` sobre `#FFFFFF` | **4.29:1** | 3 | Cumple |
+| BORDE campo · invalido | `#CE272F` sobre `#FFFFFF` | **5.31:1** | 3 | Cumple |
+| menu · item | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
+| enlace · sobre el fondo | `#2558E4` sobre `#FFFFFF` | **5.84:1** | 4.5 | Cumple |
+| enlace · frente al texto que lo rodea (informativo) | `#2558E4` sobre `#333333` | **2.16:1** | 3 | informativo |
+| enlace · subrayado en reposo | `text-decoration: underline` | — | requerido | Cumple |
+
+#### Modo oscuro — 70 comprobaciones
+
+| Elemento | Medido en el navegador | Ratio | Mín | |
+|---|---|---|---|---|
+| boton solido · primary | `#060616` sobre `#6B93FF` | **6.93:1** | 4.5 | Cumple |
+| boton outlined · primary | `#6B93FF` sobre `#101928` | **6.08:1** | 4.5 | Cumple |
+| BORDE outlined · primary | `#6B93FF` sobre `#101928` | **6.08:1** | 3 | Cumple |
+| boton texto · primary | `#6B93FF` sobre `#101928` | **6.08:1** | 4.5 | Cumple |
+| boton solido · secondary | `#A2B0C3` sobre `#1B283C` | **6.74:1** | 4.5 | Cumple |
+| boton outlined · secondary | `#7C90AB` sobre `#101928` | **5.4:1** | 4.5 | Cumple |
+| BORDE outlined · secondary | `#7C90AB` sobre `#101928` | **5.4:1** | 3 | Cumple |
+| boton texto · secondary | `#7C90AB` sobre `#101928` | **5.4:1** | 4.5 | Cumple |
+| boton solido · success | `#071D0E` sobre `#A2F0A1` | **13.03:1** | 4.5 | Cumple |
+| boton outlined · success | `#A2F0A1` sobre `#101928` | **13.02:1** | 4.5 | Cumple |
+| BORDE outlined · success | `#A2F0A1` sobre `#101928` | **13.02:1** | 3 | Cumple |
+| boton texto · success | `#A2F0A1` sobre `#101928` | **13.02:1** | 4.5 | Cumple |
+| boton solido · info | `#131A49` sobre `#8FADFF` | **7.54:1** | 4.5 | Cumple |
+| boton outlined · info | `#8FADFF` sobre `#101928` | **8.05:1** | 4.5 | Cumple |
+| BORDE outlined · info | `#8FADFF` sobre `#101928` | **8.05:1** | 3 | Cumple |
+| boton texto · info | `#8FADFF` sobre `#101928` | **8.05:1** | 4.5 | Cumple |
+| boton solido · warn | `#321606` sobre `#F4C357` | **10.21:1** | 4.5 | Cumple |
+| boton outlined · warn | `#F4C357` sobre `#101928` | **10.73:1** | 4.5 | Cumple |
+| BORDE outlined · warn | `#F4C357` sobre `#101928` | **10.73:1** | 3 | Cumple |
+| boton texto · warn | `#F4C357` sobre `#101928` | **10.73:1** | 4.5 | Cumple |
+| boton solido · help | `#081C21` sobre `#68C0CA` | **8.33:1** | 4.5 | Cumple |
+| boton outlined · help | `#68C0CA` sobre `#101928` | **8.38:1** | 4.5 | Cumple |
+| BORDE outlined · help | `#68C0CA` sobre `#101928` | **8.38:1** | 3 | Cumple |
+| boton texto · help | `#68C0CA` sobre `#101928` | **8.38:1** | 4.5 | Cumple |
+| boton solido · danger | `#330A0E` sobre `#F28888` | **7.27:1** | 4.5 | Cumple |
+| boton outlined · danger | `#F28888` sobre `#101928` | **7.26:1** | 4.5 | Cumple |
+| BORDE outlined · danger | `#F28888` sobre `#101928` | **7.26:1** | 3 | Cumple |
+| boton texto · danger | `#F28888` sobre `#101928` | **7.26:1** | 4.5 | Cumple |
+| boton solido · contrast | `#090F1A` sobre `#F1F4F9` | **17.4:1** | 4.5 | Cumple |
+| boton outlined · contrast | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| BORDE outlined · contrast | `#566E8F` sobre `#101928` | **3.38:1** | 3 | Cumple |
+| boton texto · contrast | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| message · error | `#F28888` sobre `#342B37` | **5.6:1** | 4.5 | Cumple |
+| message outlined · error | `#F28888` sobre `#101928` | **7.26:1** | 4.5 | Cumple |
+| message · warn | `#F4C357` sobre `#343430` | **7.59:1** | 4.5 | Cumple |
+| message outlined · warn | `#F4C357` sobre `#101928` | **10.73:1** | 4.5 | Cumple |
+| message · success | `#A2F0A1` sobre `#273B3B` | **8.69:1** | 4.5 | Cumple |
+| message outlined · success | `#A2F0A1` sobre `#101928` | **13.02:1** | 4.5 | Cumple |
+| message · info | `#8FADFF` sobre `#24314A` | **5.96:1** | 4.5 | Cumple |
+| message outlined · info | `#8FADFF` sobre `#101928` | **8.05:1** | 4.5 | Cumple |
+| message · secondary | `#A2B0C3` sobre `#1B283C` | **6.74:1** | 4.5 | Cumple |
+| message outlined · secondary | `#7C90AB` sobre `#101928` | **5.4:1** | 4.5 | Cumple |
+| message · contrast | `#090F1A` sobre `#F1F4F9` | **17.4:1** | 4.5 | Cumple |
+| message outlined · contrast | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| inlinemessage · error | `#F28888` sobre `#342B37` | **5.6:1** | 4.5 | Cumple |
+| toast · error resumen | `#F28888` sobre `#342B37` | **5.6:1** | 4.5 | Cumple |
+| toast · error detalle | `#F1F4F9` sobre `#342B37` | **12.33:1** | 4.5 | Cumple |
+| inlinemessage · warn | `#F4C357` sobre `#343430` | **7.59:1** | 4.5 | Cumple |
+| toast · warn resumen | `#F4C357` sobre `#343430` | **7.59:1** | 4.5 | Cumple |
+| toast · warn detalle | `#F1F4F9` sobre `#343430` | **11.3:1** | 4.5 | Cumple |
+| inlinemessage · success | `#A2F0A1` sobre `#273B3B` | **8.69:1** | 4.5 | Cumple |
+| toast · success resumen | `#A2F0A1` sobre `#273B3B` | **8.69:1** | 4.5 | Cumple |
+| toast · success detalle | `#F1F4F9` sobre `#273B3B` | **10.67:1** | 4.5 | Cumple |
+| inlinemessage · info | `#8FADFF` sobre `#24314A` | **5.96:1** | 4.5 | Cumple |
+| toast · info resumen | `#8FADFF` sobre `#24314A` | **5.96:1** | 4.5 | Cumple |
+| toast · info detalle | `#F1F4F9` sobre `#24314A` | **11.83:1** | 4.5 | Cumple |
+| tabla · celda | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| tabla · cabecera | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| tabla · fila seleccionada | `#B7CAFF` sobre `#1F2D4A` | **8.46:1** | 4.5 | Cumple |
+| formulario · input | `#F1F4F9` sobre `#090F1A` | **17.4:1** | 4.5 | Cumple |
+| formulario · etiqueta atenuada 13.6px | `#7C90AB` sobre `#101928` | **5.4:1** | 4.5 | Cumple |
+| formulario · texto de error 12.8px | `#F28888` sobre `#101928` | **7.26:1** | 4.5 | Cumple |
+| formulario · addon inputgroup | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| formulario · togglebutton | `#7C90AB` sobre `#090F1A` | **5.88:1** | 4.5 | Cumple |
+| BORDE campo · input | `#566E8F` sobre `#101928` | **3.38:1** | 3 | Cumple |
+| BORDE campo · invalido | `#E25050` sobre `#101928` | **4.61:1** | 3 | Cumple |
+| menu · item | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| enlace · sobre el fondo | `#8FADFF` sobre `#101928` | **8.05:1** | 4.5 | Cumple |
+| enlace · frente al texto que lo rodea (informativo) | `#8FADFF` sobre `#F1F4F9` | **1.99:1** | 3 | informativo |
+| enlace · subrayado en reposo | `text-decoration: underline` | — | requerido | Cumple |
+
+**140 comprobaciones, 0 fallos.** Las dos filas "informativo" son la comparación del enlace
+contra el texto que lo rodea: ningún color puede cumplir 4,5:1 sobre el fondo y 3:1 contra el
+texto a la vez, y por eso el enlace va subrayado (ver §5).
 
 ## 8. Qué se cambió fuera del primario, y por qué
 
@@ -335,13 +534,41 @@ Todo en `src/lib/theme/`.
     nuevos, para no romper a quien referencie las variables CSS `--p-nettalco-export-*` /
     `--p-nettalco-info-*` de la 1.1.x. Ya no los usa ningún token semántico. Retirar en la 2.0.
 
+12. **Hover y pulsado del primario**: ver §9, punto 5. Aclaran en vez de oscurecer.
+13. **Aviso**: relleno en `warn.600` con texto blanco y hover que oscurece (§5).
+
 **`button/index.ts`**
 
-12. **16 anillos de foco** pasan a `{focus.ring.color}` (§4).
-13. **Botones outlined y de texto**: Aura pinta el borde con el nivel 200 (1,5-1,8:1 sobre
-    blanco) y la etiqueta con el 500. El borde es lo único que identifica al botón, así que
-    necesita 3:1 y sube al 500; la etiqueta necesita 4,5:1 y baja al 600. Sin esto, el outlined
-    de "info" quedaba en **3,81:1** y el de "warn" en **3,23:1**, ambos ilegibles.
+14. **16 anillos de foco** pasan a `{focus.ring.color}` (§4).
+15. **Botones outlined y de texto en claro**: Aura pinta el borde con el nivel 200 (1,5-1,8:1
+    sobre blanco) y la etiqueta con el 500. El borde es lo único que identifica al botón, así
+    que necesita 3:1 y sube al 500; la etiqueta necesita 4,5:1 y baja al 600. Sin esto, el
+    outlined de "info" quedaba en **3,81:1** y el de "warn" en **3,23:1**, ambos ilegibles.
+16. **Bordes de outlined en OSCURO**: venían del extremo oscuro de cada rampa (`{X.700}`), que
+    sobre `surface.900` daba entre **1,00:1** (el primario: un borde literalmente invisible, un
+    `outlined` sin contorno) y 2,54:1. En modo oscuro el borde tiene que salir del extremo
+    **claro**, así que ahora usan `{X.color}`: entre 6,08:1 y 13,02:1.
+17. **Color de enlace** en ambos modos (§5).
+
+**`message/index.ts`, `toast/index.ts`, `inlinemessage/index.ts`**
+
+18. **Texto e indicadores en OSCURO**: usaban `{X.500}`, un nivel pensado para llevar texto
+    blanco encima en modo claro, no para ser texto sobre fondo oscuro. Resultado: entre
+    **2,95:1 y 4,47:1** en las cuatro severidades. Ahora usan `{X.color}`, que en oscuro ya
+    apunta al extremo claro de cada rampa: entre **5,60:1 y 8,69:1**.
+19. `message` en claro: el texto de la severidad `secondary` estaba en `{surface.500}`
+    (`#7A7A7A`, 4,29:1). Baja al 600.
+
+**`css/index.ts`**
+
+20. **Subrayado permanente del botón de enlace** (§5). Aura solo subraya al pasar el ratón.
+
+**`togglebutton/index.ts` y `inputgroup/index.ts`**
+
+21. `togglebutton` en claro: etiqueta de `{surface.500}` sobre `{surface.100}` = **3,83:1**.
+    Baja al 600 (5,53:1).
+22. `inputgroup`: el addon usaba el color de icono (`{surface.500}`, 4,29:1), pero **lleva
+    texto** (unidades, símbolos), no solo iconos, así que necesita 4,5:1. Pasa a `{surface.600}`.
 
 **Lo que NO se tocó**: los 80 y pico archivos de componente restantes. Se revisaron uno por uno
 buscando valores hex fijos o dependencias del primario viejo — **no hay ninguno**, todos
@@ -363,8 +590,11 @@ en el manual.
 2. **El verde menta `#A2F0A1` solo aparece como fondo de badge y como color de éxito en modo
    oscuro.** En modo claro no se ve casi. Es inevitable con ese nivel de luminosidad, pero es
    un color muy identificable de la marca que queda poco presente.
-3. **El botón de aviso lleva texto oscuro y su hover aclara** en vez de oscurecer. Rompe la
-   convención visual del resto de botones. La alternativa era un ámbar oscuro casi marrón.
+3. **El ámbar de aviso es el `#AB5F07`, más apagado que un amarillo-naranja de aviso clásico.**
+   Es lo que hace falta para que el botón lleve texto blanco como los demás (4,80:1). La
+   alternativa —ámbar brillante `#CE7C09` con texto oscuro— se ve más como un aviso pero obliga
+   a invertir el hover y deja ese botón fuera del patrón de todos los demás. **Elegí la
+   convención sobre el brillo**; es reversible con dos líneas si diseño prefiere lo contrario.
 4. **El verde azulado `#176973` se asignó a la severidad "help"**, que es poco usada. Fue el
    hueco que quedaba; si tiene un papel mejor en el sistema (por ejemplo "exportar", que es como
    lo usaban algunas plantillas), conviene moverlo.
@@ -386,6 +616,17 @@ en el manual.
    —que dice "recomendamos", no "obliga"— pero conviene decidirlo explícitamente.
 10. **Escala tipográfica e interlineados**: siguen sin definirse. El manual no los cubre y este
     cambio no los toca. Es el siguiente hueco a cerrar si se quiere un sistema completo.
+11. **Los enlaces van subrayados siempre**, no solo al pasar el ratón. Cambia el aspecto de
+    cualquier texto con enlaces en los trece sistemas. No es negociable por accesibilidad
+    mientras el enlace se distinga solo por color (§5), pero **sí lo sería** si se acompañara de
+    otro indicio no cromático —un icono, negrita— que diseño prefiera.
+12. **El hover y el pulsado del botón primario ahora ACLARAN en vez de oscurecer.** Con un
+    primario tan oscuro, oscurecer más daba 1,10:1 y 1,16:1: el usuario no veía respuesta al
+    pasar el ratón ni al pulsar. Aclarando se recuperan 1,35:1 y 1,49:1 (Aura logra 1,49 y
+    1,46). Visualmente el botón "se enciende" en vez de "hundirse", que es lo contrario de la
+    convención habitual, pero es la única forma de que el estado se perciba.
+13. **El color de enlace ya no es el primario de marca** sino el azul claro oscurecido
+    (`#2558E4`). Un enlace navy sobre texto casi negro era indistinguible (1,20:1).
 
 ---
 
@@ -408,6 +649,7 @@ Qué deja de hacer falta con el primario correcto:
 | `.p-field label { color: var(--color-navy-dark) !important }` | **No por contraste.** El color de etiqueta del tema ya cumple (6,19:1). Si se mantiene, que sea por decisión estética, no por legibilidad. |
 | `--color-success: var(--color-mint-light)` (menta como éxito) | **Conviene quitarla.** El menta no cumple como texto ni como relleno; el tema ya trae una rampa de éxito correcta con el menta en su sitio. |
 | Anillo de foco en verde menta en el componente de layout | **Quitarla.** El tema ya resuelve el foco sobre los dos fondos con `#4A7AFF`. |
+| Cualquier override del color de enlace hacia el navy | **Quitarla.** El navy como enlace es justamente el problema (1,20:1 contra el texto); el tema ya sirve `#2558E4` subrayado. |
 | `--p-secondary-color: #4a7aff` | **Revisar.** El tema ahora sirve `#2558E4` en `--p-secondary-color` precisamente porque `#4A7AFF` no cumple como relleno con texto blanco. |
 
 **Un defecto encontrado de paso, ajeno a este cambio**: en `nes-frontend-angular-develop/src/styles.css`
@@ -421,6 +663,17 @@ en ese repo.
 
 - Versión: **1.2.0** (`package.json` y `package-lock.json`).
 - `npm run build` (ng-packagr): **correcto**.
-- Resolución de tokens con el motor real de PrimeNG: **981 variables CSS, 0 referencias sin resolver**.
-- Contrastes: **0 fallos no esperados**.
+- Resolución de tokens con el motor real de PrimeNG: **0 referencias sin resolver**.
+- Contrastes calculados (§7.1): **0 fallos no esperados**.
+- Contrastes medidos en navegador (§7.2): **140 comprobaciones, 70 en claro y 70 en oscuro,
+  0 fallos**.
 - **Sin publicar y sin push**, a la espera de revisión.
+
+### Nota de honestidad sobre la primera versión de este informe
+
+La primera versión afirmaba "modo oscuro verificado" y "fallos no esperados: 0" apoyándose en
+una página de prueba que **no contenía mensajes ni botones `outlined` en modo oscuro**. La
+afirmación excedía lo comprobado. Al cubrirlos aparecieron cuatro regresiones reales respecto a
+Aura —bordes de `outlined` invisibles y texto de Message/Toast/InlineMessage por debajo de
+4,5:1— que están corregidas y medidas en §7.2. También contenía una afirmación falsa sobre el
+ámbar, corregida en §5.

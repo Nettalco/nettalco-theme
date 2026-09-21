@@ -35,7 +35,7 @@
  *                              color de "éxito" en modo oscuro (13,02:1).
  *   #176973  Verde azulado  Secundario. 6,35:1 sobre blanco, sí aguanta texto.
  *                           -> nettalcoTeal.600, asignado a la severidad "help",
- *                              que en Aura venía en violeta (fuera de marca).
+ *                              que este preset traía en violeta #8B5CF6.
  *   #7A7A7A  Gris frío      Neutro. 4,29:1 sobre blanco: NO cumple como texto.
  *                           -> nettalcoGray.500: bordes de campo e iconos (>=3:1).
  *                              El texto atenuado usa el 600.
@@ -222,7 +222,7 @@ const MyPreset = definePreset(Aura, {
     // VERDE AZULADO #176973 — MANUAL. Secundario de marca.
     // Es el único acento del manual que aguanta texto sobre blanco (6,35:1),
     // así que ancla el nivel 600. Se asigna a la severidad "help" de PrimeNG,
-    // que en Aura venía en violeta, un color ajeno a la marca.
+    // que este preset traía en violeta #8B5CF6, un color ajeno a la marca.
     // -----------------------------------------------------------------------
     nettalcoTeal: {
       50: '#EBF9FA',  // DECISIÓN DE INTERFAZ
@@ -306,23 +306,23 @@ const MyPreset = definePreset(Aura, {
 
     // -----------------------------------------------------------------------
     // AVISO — DECISIÓN DE INTERFAZ. No está en el manual. Ámbar.
-    // AVISO IMPORTANTE: ningún ámbar lo bastante luminoso para leerse como
-    // "aviso" admite texto blanco (blanco sobre el 500 = 3,23:1). Por eso el
-    // botón de aviso lleva texto OSCURO (warn.950 sobre warn.500 = 5,20:1) y
-    // su hover ACLARA en vez de oscurecer, para no perder ese contraste.
+    // El relleno del botón en modo claro es el 600, que sí admite texto blanco
+    // (4,80:1); el 500 no llega (3,23:1) y por eso no se usa como relleno,
+    // aunque sí vale como borde (>=3:1). En modo oscuro el relleno es el 300
+    // con texto oscuro encima, que es lo normal sobre fondo oscuro.
     // -----------------------------------------------------------------------
     nettalcoWarn: {
       50: '#FEFAEB',  // DECISIÓN DE INTERFAZ
       100: '#FDEFC9', // DECISIÓN DE INTERFAZ
       200: '#F9DD94', // DECISIÓN DE INTERFAZ
-      300: '#F4C357', // DECISIÓN DE INTERFAZ - modo oscuro (10,73:1)
-      400: '#F0A119', // DECISIÓN DE INTERFAZ - hover del botón (aclara)
-      500: '#CE7C09', // DECISIÓN DE INTERFAZ - botón, con texto oscuro
-      600: '#AB5F07', // DECISIÓN DE INTERFAZ
-      700: '#8B4809', // DECISIÓN DE INTERFAZ - texto de aviso (6,93:1)
-      800: '#6F370B', // DECISIÓN DE INTERFAZ
+      300: '#F4C357', // DECISIÓN DE INTERFAZ - relleno en modo oscuro (10,73:1)
+      400: '#F0A119', // DECISIÓN DE INTERFAZ
+      500: '#CE7C09', // DECISIÓN DE INTERFAZ - borde (3,23:1); NO admite blanco
+      600: '#AB5F07', // DECISIÓN DE INTERFAZ - relleno del botón (blanco 4,80:1)
+      700: '#8B4809', // DECISIÓN DE INTERFAZ - hover y texto de aviso (6,93:1)
+      800: '#6F370B', // DECISIÓN DE INTERFAZ - pulsado (9,43:1)
       900: '#55290C', // DECISIÓN DE INTERFAZ
-      950: '#321606', // DECISIÓN DE INTERFAZ - texto sobre el botón de aviso
+      950: '#321606', // DECISIÓN DE INTERFAZ - texto sobre el ámbar en oscuro
     },
 
     // -----------------------------------------------------------------------
@@ -398,8 +398,9 @@ const MyPreset = definePreset(Aura, {
       950: '{nettalcoSecondary.950}',
     },
     // AYUDA — DECISIÓN DE INTERFAZ en el significado; color del manual
-    // (#176973). Aura referencia {help.*} desde el botón pero nunca define la
-    // rampa: sin esto quedaban referencias colgando y un violeta fuera de marca.
+    // (#176973). Aura NO define `help` en ningún nivel: quien referencia
+    // {help.50}..{help.500} es la copia vendorizada de button/index.ts de este
+    // repo, así que eran referencias colgando. Ahora la rampa existe.
     help: {
       50: '{nettalcoTeal.50}',
       100: '{nettalcoTeal.100}',
@@ -474,14 +475,20 @@ const MyPreset = definePreset(Aura, {
           900: '{nettalcoGray.900}',
           950: '{nettalcoGray.950}',
         },
-        // El hover y el pulsado del primario oscurecen de forma progresiva.
-        // Antes iban 500 -> 900 -> 800, o sea el pulsado era MÁS CLARO que el
-        // hover; con la rampa vieja además el 600 era más oscuro que el 700.
+        // DECISIÓN DE INTERFAZ: el hover y el pulsado ACLARAN, no oscurecen.
+        // El azul oscuro de marca ya está casi en el suelo de luminancia: bajar
+        // al 600/700 da cambios de 1,10:1 y 1,16:1, imperceptibles (Aura llega
+        // a 1,49:1 y 1,46:1 porque parte de un verde medio). Aclarando hacia el
+        // 400 -por mezcla, para no salirse de la familia del azul de marca- se
+        // recuperan 1,35:1 y 1,49:1 con el texto blanco por encima de 9:1.
+        // Es la misma inversión que necesita cualquier primario muy oscuro.
         primary: {
-          color: '{primary.500}',       // MANUAL - #1C224D
-          contrastColor: '#ffffff',     // 15,16:1
-          hoverColor: '{primary.600}',  // DECISIÓN DE INTERFAZ
-          activeColor: '{primary.700}', // DECISIÓN DE INTERFAZ
+          color: '{primary.500}',   // MANUAL - #1C224D
+          contrastColor: '#ffffff', // 15,16:1
+          // = #293282 | 1,35:1 sobre el 500 | blanco encima 11,21:1
+          hoverColor: 'color-mix(in srgb, {primary.500}, {primary.400} 50%)',
+          // = #2C3791 | 1,49:1 sobre el 500 | blanco encima 10,18:1
+          activeColor: 'color-mix(in srgb, {primary.500}, {primary.400} 65%)',
         },
         // DECISIÓN DE INTERFAZ: el azul claro de marca no cumple como texto ni
         // como fondo de texto en su valor puro (blanco sobre #4A7AFF = 3,81:1),
@@ -505,13 +512,16 @@ const MyPreset = definePreset(Aura, {
           hoverColor: '{info.700}',
           activeColor: '{info.800}',
         },
-        // DECISIÓN DE INTERFAZ: texto OSCURO sobre el ámbar, y hover que
-        // ACLARA. Un ámbar que admita texto blanco deja de leerse como aviso.
+        // DECISIÓN DE INTERFAZ: ámbar con texto blanco y hover que oscurece,
+        // igual que el resto de severidades. El 500 (#CE7C09) no admite blanco
+        // -3,23:1-, pero el 600 sí (4,80:1), así que el relleno es el 600. Se
+        // paga con un ámbar algo más apagado que el brillante de manual de
+        // estilo; a cambio no se rompe la convención de los demás botones.
         warn: {
-          color: '{warn.500}',
-          contrastColor: '{warn.950}', // 5,20:1
-          hoverColor: '{warn.400}',    // 7,83:1 con el mismo texto oscuro
-          activeColor: '{warn.300}',   // 10,73:1
+          color: '{warn.600}',      // #AB5F07
+          contrastColor: '#ffffff', // 4,80:1
+          hoverColor: '{warn.700}', // 6,93:1
+          activeColor: '{warn.800}',// 9,43:1
         },
         error: {
           color: '{error.500}',
@@ -519,7 +529,8 @@ const MyPreset = definePreset(Aura, {
           hoverColor: '{error.600}',
           activeColor: '{error.700}',
         },
-        // El violeta de Aura era ajeno a la marca; pasa al verde azulado.
+        // El violeta #8B5CF6 que traía este preset era ajeno a la marca; pasa
+        // al verde azulado del manual.
         help: {
           color: '{help.600}',         // MANUAL - #176973
           contrastColor: '#ffffff',    // 6,35:1
