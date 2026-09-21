@@ -4,8 +4,10 @@ Alineación del preset con el manual de marca oficial (`Nettalco_manual de marca
 y decisión razonada de todo lo que el manual no cubre.
 
 Lo usan 13 sistemas, así que cada decisión de aquí se multiplica por trece. Por eso: todo
-contraste de este informe está **medido** con la fórmula WCAG 2.1, no estimado, y los
-valores críticos están además **verificados en navegador** sobre componentes PrimeNG reales.
+contraste de este informe está **medido** con la fórmula WCAG 2.1, no estimado, y los valores
+críticos están además **verificados en navegador** sobre componentes PrimeNG reales, en los dos
+modos. El alcance exacto de esa verificación —qué diez componentes cubre y qué queda fuera—
+está enumerado al principio de §7.2, y la nota de método de §11 explica por qué.
 
 ---
 
@@ -326,26 +328,39 @@ que **no** hay que hacer (o lo que fallaba antes); su "No cumple" es el resultad
 
 ### 7.2 Medido en el navegador, sobre componentes PrimeNG reales
 
-Esta es la verificación que importa, y en la primera versión de este informe **no estaba
-completa**: la página de prueba no incluía mensajes ni botones `outlined` en modo oscuro, así
-que el "modo oscuro verificado" que afirmé no estaba respaldado. Lo estaba solo el modo claro.
-Rehecha, la comprobación ahora cubre los dos modos con los mismos componentes.
+#### Alcance exacto de esta verificación
 
-Cómo está montada, para que se pueda repetir:
+**Lo que se mide** (10 componentes, los dos modos):
+
+`button` (8 severidades × sólido/outlined/texto, más el botón de enlace) · `inputtext`
+(normal, foco, inválido, deshabilitado) · `inputgroup` (addon) · `togglebutton` · `datatable`
+(celda, cabecera, fila seleccionada) · `menu` · `message` (6 severidades, normal y `outlined`) ·
+`inlinemessage` · `toast` (resumen y detalle) · `tag`. Más la capa semántica que todos
+comparten: superficies, texto, texto atenuado, bordes de campo, resaltado y anillo de foco.
+
+**Lo que NO se mide**: los otros ~75 archivos de componente del preset (`select`, `checkbox`,
+`datepicker`, `dialog`, `paginator`, `tree`, `stepper`…). Todos referencian los mismos tokens
+semánticos que sí están medidos, así que heredan las correcciones —pero eso es una **inferencia,
+no una medición**, y así hay que leerlo.
+
+#### Cómo está montada, para que se pueda repetir
 
 - Se resuelve el preset compilado con el motor real de PrimeNG y se extrae el **CSS real de los
-  componentes** (`@primeuix/styles`), sus variables por componente y el bloque `css` del propio
-  preset.
-- Una sola página con botones de las 8 severidades en sus 3 variantes, campos (normal, foco,
-  inválido, deshabilitado, grupo con addon, togglebutton), enlace dentro de un párrafo,
-  Message normal y `outlined`, InlineMessage, Toast, tabla con fila seleccionada y menú.
+  componentes** (`@primeuix/styles`), sus variables por componente y el bloque `css` del preset.
 - Se mide con Playwright el color **realmente pintado**, componiendo la transparencia de los
   `color-mix` contra el fondo efectivo de cada ancestro.
 - El modo oscuro se activa con `.p-dark` en el **elemento raíz** y **se mide en una llamada
-  aparte**: hacerlo en el mismo turno que el cambio de clase devuelve valores del modo claro y
-  fue justo lo que enmascaró el problema la primera vez.
+  aparte**: hacerlo en el mismo turno que el cambio de clase devuelve valores del modo claro.
+- Cada medición comprueba además que el elemento está **realmente tematizado**: que su color
+  computado coincide con la variable del componente (`--p-inputgroup-addon-color`,
+  `--p-togglebutton-color`, `--p-toast-*-detail-color`, `--p-tag-*-color`). Si un elemento
+  hereda el color en vez de recibirlo del tema, la medición no prueba nada sobre el tema y se
+  marca. **154 de 154 dan tematizado correcto.** Esta comprobación se añadió porque una versión
+  anterior de la página usaba la clase inexistente `p-inputgroup-addon` (la real es
+  `p-inputgroupaddon`): el addon no se pintaba con el tema y la medición parecía correcta sin
+  serlo.
 
-#### Modo claro — 70 comprobaciones
+#### Modo claro — 77 comprobaciones
 
 | Elemento | Medido en el navegador | Ratio | Mín | |
 |---|---|---|---|---|
@@ -383,16 +398,22 @@ Cómo está montada, para que se pueda repetir:
 | boton texto · contrast | `#121212` sobre `#FFFFFF` | **18.73:1** | 4.5 | Cumple |
 | message · error | `#AF1D24` sobre `#FEF2F2` | **6.34:1** | 4.5 | Cumple |
 | message outlined · error | `#AF1D24` sobre `#FFFFFF` | **6.94:1** | 4.5 | Cumple |
+| tag · danger | `#92161C` sobre `#FCDEDE` | **7.07:1** | 4.5 | Cumple |
 | message · warn | `#AB5F07` sobre `#FEFAEC` | **4.61:1** | 4.5 | Cumple |
 | message outlined · warn | `#AB5F07` sobre `#FFFFFF` | **4.8:1** | 4.5 | Cumple |
+| tag · warn | `#8B4809` sobre `#FDEFC9` | **6.06:1** | 4.5 | Cumple |
 | message · success | `#176D28` sobre `#EAFBEA` | **6:1** | 4.5 | Cumple |
 | message outlined · success | `#176D28` sobre `#FFFFFF` | **6.45:1** | 4.5 | Cumple |
+| tag · success | `#125923` sobre `#CBF6CB` | **7.09:1** | 4.5 | Cumple |
 | message · info | `#2558E4` sobre `#F1F5FF` | **5.34:1** | 4.5 | Cumple |
 | message outlined · info | `#2558E4` sobre `#FFFFFF` | **5.84:1** | 4.5 | Cumple |
+| tag · info | `#1A42BC` sobre `#DBE5FF` | **6.54:1** | 4.5 | Cumple |
 | message · secondary | `#616161` sobre `#F2F2F2` | **5.53:1** | 4.5 | Cumple |
 | message outlined · secondary | `#616161` sobre `#FFFFFF` | **6.19:1** | 4.5 | Cumple |
+| tag · secondary | `#616161` sobre `#F2F2F2` | **5.53:1** | 4.5 | Cumple |
 | message · contrast | `#FAFAFA` sobre `#1F1F1F` | **15.79:1** | 4.5 | Cumple |
 | message outlined · contrast | `#121212` sobre `#FFFFFF` | **18.73:1** | 4.5 | Cumple |
+| tag · contrast | `#FFFFFF` sobre `#121212` | **18.73:1** | 4.5 | Cumple |
 | inlinemessage · error | `#AF1D24` sobre `#FEF2F2` | **6.34:1** | 4.5 | Cumple |
 | toast · error resumen | `#AF1D24` sobre `#FEF2F2` | **6.34:1** | 4.5 | Cumple |
 | toast · error detalle | `#4A4A4A` sobre `#FEF2F2` | **8.09:1** | 4.5 | Cumple |
@@ -409,18 +430,19 @@ Cómo está montada, para que se pueda repetir:
 | tabla · cabecera | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
 | tabla · fila seleccionada | `#121538` sobre `#F1F2FB` | **15.83:1** | 4.5 | Cumple |
 | formulario · input | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
-| formulario · etiqueta atenuada 13.6px | `#616161` sobre `#FFFFFF` | **6.19:1** | 4.5 | Cumple |
-| formulario · texto de error 12.8px | `#92161C` sobre `#FFFFFF` | **8.92:1** | 4.5 | Cumple |
-| formulario · addon inputgroup | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
+| formulario · etiqueta atenuada | `#616161` sobre `#FFFFFF` | **6.19:1** | 4.5 | Cumple |
+| formulario · texto de error | `#92161C` sobre `#FFFFFF` | **8.92:1** | 4.5 | Cumple |
+| formulario · addon inputgroup | `#616161` sobre `#FFFFFF` | **6.19:1** | 4.5 | Cumple |
 | formulario · togglebutton | `#616161` sobre `#F2F2F2` | **5.53:1** | 4.5 | Cumple |
 | BORDE campo · input | `#7A7A7A` sobre `#FFFFFF` | **4.29:1** | 3 | Cumple |
 | BORDE campo · invalido | `#CE272F` sobre `#FFFFFF` | **5.31:1** | 3 | Cumple |
+| BORDE addon · inputgroup | `#7A7A7A` sobre `#FFFFFF` | **4.29:1** | 3 | Cumple |
 | menu · item | `#333333` sobre `#FFFFFF` | **12.63:1** | 4.5 | Cumple |
 | enlace · sobre el fondo | `#2558E4` sobre `#FFFFFF` | **5.84:1** | 4.5 | Cumple |
 | enlace · frente al texto que lo rodea (informativo) | `#2558E4` sobre `#333333` | **2.16:1** | 3 | informativo |
 | enlace · subrayado en reposo | `text-decoration: underline` | — | requerido | Cumple |
 
-#### Modo oscuro — 70 comprobaciones
+#### Modo oscuro — 77 comprobaciones
 
 | Elemento | Medido en el navegador | Ratio | Mín | |
 |---|---|---|---|---|
@@ -458,16 +480,22 @@ Cómo está montada, para que se pueda repetir:
 | boton texto · contrast | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
 | message · error | `#F28888` sobre `#342B37` | **5.6:1** | 4.5 | Cumple |
 | message outlined · error | `#F28888` sobre `#101928` | **7.26:1** | 4.5 | Cumple |
+| tag · danger | `#F28888` sobre `#2E1B29` | **6.61:1** | 4.5 | Cumple |
 | message · warn | `#F4C357` sobre `#343430` | **7.59:1** | 4.5 | Cumple |
 | message outlined · warn | `#F4C357` sobre `#101928` | **10.73:1** | 4.5 | Cumple |
+| tag · warn | `#F4C357` sobre `#2E2923` | **8.78:1** | 4.5 | Cumple |
 | message · success | `#A2F0A1` sobre `#273B3B` | **8.69:1** | 4.5 | Cumple |
 | message outlined · success | `#A2F0A1` sobre `#101928` | **13.02:1** | 4.5 | Cumple |
+| tag · success | `#6ECF74` sobre `#132B2A` | **7.74:1** | 4.5 | Cumple |
 | message · info | `#8FADFF` sobre `#24314A` | **5.96:1** | 4.5 | Cumple |
 | message outlined · info | `#8FADFF` sobre `#101928` | **8.05:1** | 4.5 | Cumple |
+| tag · info | `#8FADFF` sobre `#19294A` | **6.6:1** | 4.5 | Cumple |
 | message · secondary | `#A2B0C3` sobre `#1B283C` | **6.74:1** | 4.5 | Cumple |
 | message outlined · secondary | `#7C90AB` sobre `#101928` | **5.4:1** | 4.5 | Cumple |
+| tag · secondary | `#A2B0C3` sobre `#1B283C` | **6.74:1** | 4.5 | Cumple |
 | message · contrast | `#090F1A` sobre `#F1F4F9` | **17.4:1** | 4.5 | Cumple |
 | message outlined · contrast | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| tag · contrast | `#090F1A` sobre `#F1F4F9` | **17.4:1** | 4.5 | Cumple |
 | inlinemessage · error | `#F28888` sobre `#342B37` | **5.6:1** | 4.5 | Cumple |
 | toast · error resumen | `#F28888` sobre `#342B37` | **5.6:1** | 4.5 | Cumple |
 | toast · error detalle | `#F1F4F9` sobre `#342B37` | **12.33:1** | 4.5 | Cumple |
@@ -484,20 +512,21 @@ Cómo está montada, para que se pueda repetir:
 | tabla · cabecera | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
 | tabla · fila seleccionada | `#B7CAFF` sobre `#1F2D4A` | **8.46:1** | 4.5 | Cumple |
 | formulario · input | `#F1F4F9` sobre `#090F1A` | **17.4:1** | 4.5 | Cumple |
-| formulario · etiqueta atenuada 13.6px | `#7C90AB` sobre `#101928` | **5.4:1** | 4.5 | Cumple |
-| formulario · texto de error 12.8px | `#F28888` sobre `#101928` | **7.26:1** | 4.5 | Cumple |
-| formulario · addon inputgroup | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
+| formulario · etiqueta atenuada | `#7C90AB` sobre `#101928` | **5.4:1** | 4.5 | Cumple |
+| formulario · texto de error | `#F28888` sobre `#101928` | **7.26:1** | 4.5 | Cumple |
+| formulario · addon inputgroup | `#7C90AB` sobre `#090F1A` | **5.88:1** | 4.5 | Cumple |
 | formulario · togglebutton | `#7C90AB` sobre `#090F1A` | **5.88:1** | 4.5 | Cumple |
 | BORDE campo · input | `#566E8F` sobre `#101928` | **3.38:1** | 3 | Cumple |
 | BORDE campo · invalido | `#E25050` sobre `#101928` | **4.61:1** | 3 | Cumple |
+| BORDE addon · inputgroup | `#566E8F` sobre `#101928` | **3.38:1** | 3 | Cumple |
 | menu · item | `#F1F4F9` sobre `#101928` | **15.98:1** | 4.5 | Cumple |
 | enlace · sobre el fondo | `#8FADFF` sobre `#101928` | **8.05:1** | 4.5 | Cumple |
 | enlace · frente al texto que lo rodea (informativo) | `#8FADFF` sobre `#F1F4F9` | **1.99:1** | 3 | informativo |
 | enlace · subrayado en reposo | `text-decoration: underline` | — | requerido | Cumple |
 
-**140 comprobaciones, 0 fallos.** Las dos filas "informativo" son la comparación del enlace
-contra el texto que lo rodea: ningún color puede cumplir 4,5:1 sobre el fondo y 3:1 contra el
-texto a la vez, y por eso el enlace va subrayado (ver §5).
+**154 comprobaciones, 77 por modo, 0 fallos y 0 elementos sin tematizar.** Las dos filas
+"informativo" son la comparación del enlace contra el texto que lo rodea: ningún color puede
+cumplir 4,5:1 sobre el fondo y 3:1 contra el texto a la vez, y por eso va subrayado (§5).
 
 ## 8. Qué se cambió fuera del primario, y por qué
 
@@ -568,7 +597,19 @@ Todo en `src/lib/theme/`.
 21. `togglebutton` en claro: etiqueta de `{surface.500}` sobre `{surface.100}` = **3,83:1**.
     Baja al 600 (5,53:1).
 22. `inputgroup`: el addon usaba el color de icono (`{surface.500}`, 4,29:1), pero **lleva
-    texto** (unidades, símbolos), no solo iconos, así que necesita 4,5:1. Pasa a `{surface.600}`.
+    texto** (unidades, símbolos), no solo iconos, así que necesita 4,5:1. Pasa a
+    **`{text.muted.color}`**: `#616161` en claro (6,19:1) y `#7C90AB` en oscuro (5,88:1).
+
+    Aquí caí en el mismo error que este cambio venía a corregir. Lo puse primero en
+    `{surface.600}`, que arregla el claro y **rompe el oscuro**: la rampa de superficies oscuras
+    corre invertida, así que `surface.600` en oscuro es `#3D5271`, un pizarra oscuro sobre el
+    fondo de campo `#090F1A` → **2,41:1**, peor que el 5,88 que había antes y que el 7,76 de
+    Aura. Y este archivo **no tiene sección `colorScheme`**, así que ese único valor sirve a los
+    dos modos: cualquier token que se ponga aquí tiene que distinguir claro de oscuro por sí
+    mismo, y eso lo hace `{text.muted.color}`, no un nivel fijo de la rampa.
+
+    **Regla general que sale de aquí**: en un archivo de componente sin `colorScheme`, nunca un
+    nivel crudo de `surface`; siempre un token semántico que ya esté definido por esquema.
 
 **Lo que NO se tocó**: los 80 y pico archivos de componente restantes. Se revisaron uno por uno
 buscando valores hex fijos o dependencias del primario viejo — **no hay ninguno**, todos
@@ -665,15 +706,23 @@ en ese repo.
 - `npm run build` (ng-packagr): **correcto**.
 - Resolución de tokens con el motor real de PrimeNG: **0 referencias sin resolver**.
 - Contrastes calculados (§7.1): **0 fallos no esperados**.
-- Contrastes medidos en navegador (§7.2): **140 comprobaciones, 70 en claro y 70 en oscuro,
-  0 fallos**.
+- Contrastes medidos en navegador (§7.2): **154 comprobaciones sobre 10 componentes, 77 por
+  modo, 0 fallos, 0 elementos sin tematizar**. El alcance exacto —y lo que queda fuera— está
+  al principio de §7.2.
 - **Sin publicar y sin push**, a la espera de revisión.
 
-### Nota de honestidad sobre la primera versión de este informe
+### Nota de método
 
-La primera versión afirmaba "modo oscuro verificado" y "fallos no esperados: 0" apoyándose en
-una página de prueba que **no contenía mensajes ni botones `outlined` en modo oscuro**. La
-afirmación excedía lo comprobado. Al cubrirlos aparecieron cuatro regresiones reales respecto a
-Aura —bordes de `outlined` invisibles y texto de Message/Toast/InlineMessage por debajo de
-4,5:1— que están corregidas y medidas en §7.2. También contenía una afirmación falsa sobre el
-ámbar, corregida en §5.
+Dos veces en este trabajo la afirmación fue más amplia que la medición, y las dos veces lo
+detectó la revisión y no yo:
+
+1. La primera versión decía "modo oscuro verificado" con una página que **no contenía mensajes
+   ni botones `outlined` en oscuro**. Al añadirlos aparecieron cuatro regresiones reales.
+2. La segunda decía "0 fallos" cuando la página **no renderizaba un addon de InputGroup** —el
+   componente que ese mismo commit tocaba—, porque usaba la clase inexistente
+   `p-inputgroup-addon` en vez de `p-inputgroupaddon`. La medición existía, pero medía un
+   elemento sin tematizar.
+
+De ahí las dos defensas que ahora lleva §7.2: **el alcance se enumera** en vez de decir "0
+fallos" a secas, y **cada medición comprueba que el elemento está realmente tematizado** antes
+de contar como aprobada. Un elemento que hereda el color no prueba nada sobre el tema.
