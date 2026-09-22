@@ -1,0 +1,59 @@
+name: Publish Package
+
+# Mismo disparador que los demas paquetes de la organizacion (nes-client, cache,
+# errors, rate-limiter...): se publica al empujar una etiqueta de version.
+#
+#   git tag v1.2.0 && git push origin v1.2.0
+#
+# Este repo era el UNICO de los quince sin publicacion automatica, y se publicaba
+# a mano. Esa es la razon de fondo por la que el tema se desincronizo de los
+# sistemas que lo consumen: varios acabaron parcheando el color primario en su
+# propio CSS porque el paquete publicado traia un valor que no era el del manual
+# de marca. Con esto, publicar deja de depender de que alguien se acuerde.
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Este paquete usa npm (package-lock.json) y ng-packagr, no pnpm como el
+      # resto: es una libreria de Angular, no un paquete de Node plano.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # La etiqueta manda sobre el package.json, para que no puedan divergir.
+      - name: Sync version from git tag
+        run: |
+          TAG="${GITHUB_REF#refs/tags/v}"
+          echo "Publishing version: $TAG"
+          npm version "$TAG" --no-git-tag-version --allow-same-version
+
+      # ng-packagr compila a dist/nettalco-theme y escribe alli el package.json
+      # publicable (con su name, version y publishConfig). El build tambien falla
+      # si algun token del preset referencia algo que no existe.
+      - name: Build
+        run: npm run build
+
+      # Se publica el artefacto compilado, NO la raiz del repo.
+      - name: Publish to GitHub Packages
+        run: npm publish
+        working-directory: dist/nettalco-theme
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
