@@ -24,12 +24,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # Este paquete usa npm (package-lock.json) y ng-packagr, no pnpm como el
       # resto: es una libreria de Angular, no un paquete de Node plano.
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: "npm"
