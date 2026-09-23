@@ -32,9 +32,14 @@ const css = /*css*/ `
      * resuelve solo: cumplir 4,5:1 sobre blanco exige luminancia <= 0,1833 y
      * despegarse 3:1 del texto base exige >= 0,1993, que es incompatible. El
      * subrayado permanente aporta el indicio no cromático que falta.
+     * Permanente también fuera de un párrafo: un botón de enlace suelto sin
+     * subrayado se lee como texto y no invita al clic.
+     * El offset despega la línea de las descendentes (g, j, p, y): es la
+     * diferencia entre un subrayado cuidado y uno de procesador de textos.
      */
     .p-button-link .p-button-label {
         text-decoration: underline;
+        text-underline-offset: 0.18em;
     }
 `;
 
