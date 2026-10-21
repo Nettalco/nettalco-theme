@@ -21,3 +21,6 @@ Thumbs.db
 
 # NPM credentials (IMPORTANTE: nunca subir tokens)
 .npmrc
+
+# Lockfile de npm: el gestor es pnpm (pnpm-lock.yaml)
+package-lock.json

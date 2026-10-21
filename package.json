@@ -1,6 +1,7 @@
 {
   "name": "@nettalco/nettalco-theme",
   "version": "1.2.1",
+  "packageManager": "pnpm@11.12.0",
   "description": "Nettalco custom PrimeNG theme and components",
   "repository": {
     "type": "git",
@@ -8,7 +9,7 @@
   },
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
-    "pack": "cd dist/nettalco-theme && npm pack"
+    "pack": "cd dist/nettalco-theme && pnpm pack"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

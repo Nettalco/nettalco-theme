@@ -1,0 +1,5 @@
+# Scripts de instalación bloqueados salvo los que hagan falta. Ninguno hace falta para compilar ni probar:
+# esbuild y msgpackr-extract traen su binario por paquetes opcionales por plataforma; @parcel/watcher solo sirve al modo watch.
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: false

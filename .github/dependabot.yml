@@ -1,6 +1,6 @@
 version: 2
 updates:
-  # Patch y minor en un solo PR (grupo "menores"); cada major va aparte.
+  # Patch y minor en un solo PR (grupo "menores"); los majors no se proponen (ver ignore).
   - package-ecosystem: npm
     directory: /
     schedule:
@@ -9,6 +9,11 @@ updates:
       time: "07:00"
       timezone: America/Lima
     open-pull-requests-limit: 5
+    ignore:
+      # Los majors los decide el equipo (ticket propio): Dependabot solo propone patch y minor.
+      # Si un major llega a ser de seguridad, la auditoria semanal avisa.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       menores:
         update-types:
@@ -21,6 +26,11 @@ updates:
       interval: monthly
       time: "07:00"
       timezone: America/Lima
+    ignore:
+      # pnpm/action-setup v6 rompio el CI de auth-service ("self-installer exits with code 1"):
+      # ese major se sube a mano cuando se pruebe. El resto de acciones sigue proponiendose.
+      - dependency-name: "pnpm/action-setup"
+        update-types: ["version-update:semver-major"]
     groups:
       acciones:
         patterns:
