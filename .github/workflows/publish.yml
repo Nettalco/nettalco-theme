@@ -26,34 +26,37 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      # Este paquete usa npm (package-lock.json) y ng-packagr, no pnpm como el
-      # resto: es una libreria de Angular, no un paquete de Node plano.
+      # Libreria de Angular (ng-packagr): se instala y construye con pnpm; se publica el
+      # artefacto de dist/nettalco-theme.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: "22"
-          cache: "npm"
+          cache: "pnpm"
           registry-url: "https://npm.pkg.github.com"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       # La etiqueta manda sobre el package.json, para que no puedan divergir.
       - name: Sync version from git tag
         run: |
           TAG="${GITHUB_REF#refs/tags/v}"
           echo "Publishing version: $TAG"
-          npm version "$TAG" --no-git-tag-version --allow-same-version
+          pnpm version "$TAG" --no-git-tag-version --allow-same-version
 
       # ng-packagr compila a dist/nettalco-theme y escribe alli el package.json
       # publicable (con su name, version y publishConfig). El build tambien falla
       # si algun token del preset referencia algo que no existe.
       - name: Build
-        run: npm run build
+        run: pnpm run build
 
       # Se publica el artefacto compilado, NO la raiz del repo.
       - name: Publish to GitHub Packages
-        run: npm publish
+        run: pnpm publish --no-git-checks
         working-directory: dist/nettalco-theme
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
