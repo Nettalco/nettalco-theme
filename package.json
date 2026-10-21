@@ -24,7 +24,7 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "@angular/compiler": "^21.2.0",
+    "@angular/compiler": "^21.2.20",
     "@angular/compiler-cli": "^21.2.0",
     "@primeuix/themes": "^2.0.3",
     "ng-packagr": "^21.0.0",
