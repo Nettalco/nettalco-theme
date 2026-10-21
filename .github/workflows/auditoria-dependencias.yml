@@ -61,10 +61,12 @@ jobs:
             }
           else
             LOCK=package-lock.json
-            auditar() { npm audit --omit=dev --audit-level=high; }
+            # --omit=peer: Angular y PrimeNG son peerDependencies, no viajan con el paquete (cada
+            # sistema pone los suyos). Lo que se publica es solo `dependencies` (tslib).
+            auditar() { npm audit --omit=dev --omit=peer --audit-level=high; }
             reinstalar() { npm ci; }
             verificar() { npm run --if-present build && npm run --if-present test; }
-            arreglar() { npm audit fix --omit=dev || true; }   # nunca --force
+            arreglar() { npm audit fix --omit=dev --omit=peer || true; }   # nunca --force
           fi
 
           if auditar; then
