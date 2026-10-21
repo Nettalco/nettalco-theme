@@ -1,0 +1,112 @@
+name: Auditoria de dependencias
+
+# Cada lunes 07:00 (America/Lima): audita lo que se publica. Si el aviso se arregla dentro de
+# los rangos y build y tests pasan, abre (o actualiza) un PR y termina en verde, porque el PR ya
+# avisa. Si no se puede arreglar solo, falla para que GitHub avise del workflow fallido.
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auditoria:
+    runs-on: ubuntu-latest
+    env:
+      GESTOR: npm # npm | pnpm
+      RAMA: deps/auditoria-semanal
+      DESTINO: ${{ github.event.repository.default_branch }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Activar pnpm (version de packageManager)
+        if: env.GESTOR == 'pnpm'
+        run: corepack enable
+
+      - name: Install dependencies
+        run: |
+          if [ "$GESTOR" = pnpm ]; then pnpm install --frozen-lockfile; else npm ci; fi
+
+      - name: Auditar, arreglar y abrir PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          # Todo lo que cambia entre npm y pnpm esta en este bloque.
+          if [ "$GESTOR" = pnpm ]; then
+            LOCK=pnpm-lock.yaml
+            auditar() { pnpm audit --prod --audit-level high; }
+            reinstalar() { pnpm install --frozen-lockfile; }
+            verificar() { pnpm run --if-present build && pnpm run --if-present test; }
+            arreglar() {
+              # --fix=update tambien agrega las versiones nuevas a minimumReleaseAgeExclude en
+              # pnpm-workspace.yaml: se descarta. Si el parche es demasiado nuevo para la regla de
+              # antiguedad minima, la reinstalacion falla y el job avisa.
+              local versionado=0
+              git ls-files --error-unmatch pnpm-workspace.yaml > /dev/null 2>&1 && versionado=1
+              pnpm audit --fix=update || true
+              if [ "$versionado" = 1 ]; then git checkout -- pnpm-workspace.yaml; else rm -f pnpm-workspace.yaml; fi
+              pnpm install --no-frozen-lockfile
+            }
+          else
+            LOCK=package-lock.json
+            auditar() { npm audit --omit=dev --audit-level=high; }
+            reinstalar() { npm ci; }
+            verificar() { npm run --if-present build && npm run --if-present test; }
+            arreglar() { npm audit fix --omit=dev || true; }   # nunca --force
+          fi
+
+          if auditar; then
+            echo "Sin avisos high/critical en lo que se publica."
+            exit 0
+          fi
+
+          arreglar
+          reinstalar
+          if ! auditar; then
+            echo "::error::Quedan avisos high/critical que no se arreglan dentro de los rangos. Va a mano."
+            exit 1
+          fi
+          if ! verificar; then
+            echo "::error::El arreglo no pasa build y tests. Va a mano."
+            exit 1
+          fi
+          if git diff --quiet -- package.json "$LOCK"; then
+            echo "::error::La auditoria queda limpia pero no hay cambios que subir."
+            exit 1
+          fi
+
+          if [ -z "${GITHUB_ACTIONS:-}" ]; then
+            echo "Prueba local: arreglado y verificado, no se sube nada."
+            git diff --stat
+            exit 0
+          fi
+
+          # Solo package.json y el lockfile: build y tests dejan otros archivos (dist, coverage).
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$RAMA"
+          git add -- package.json "$LOCK"
+          git commit -m "fix(deps): auditoria semanal, $GESTOR audit fix"
+          git push --force origin "HEAD:refs/heads/$RAMA"
+
+          titulo="Auditoria semanal de dependencias"
+          cuerpo="Arreglo automatico dentro de los rangos de package.json ($GESTOR audit fix), sin --force. Despues del arreglo la auditoria de produccion queda limpia y build y tests pasan. Los PR que crea el token del workflow no disparan otros workflows: si hace falta, reabrir el PR o empujar un commit vacio para correr CI."
+          n=$(gh pr list --head "$RAMA" --base "$DESTINO" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$n" ]; then
+            gh pr edit "$n" --title "$titulo" --body "$cuerpo"
+          else
+            gh pr create --base "$DESTINO" --head "$RAMA" --title "$titulo" --body "$cuerpo"
+          fi
+          echo "::notice::PR con el arreglo abierto o actualizado desde $RAMA. Revisar y mergear."
