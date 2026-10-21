@@ -27,9 +27,9 @@ updates:
       time: "07:00"
       timezone: America/Lima
     ignore:
-      # Los majors los decide el equipo (ticket propio): Dependabot solo propone patch y minor.
-      # Si un major llega a ser de seguridad, la auditoria semanal avisa.
-      - dependency-name: "*"
+      # pnpm/action-setup v6 rompio el CI de auth-service ("self-installer exits with code 1"):
+      # ese major se sube a mano cuando se pruebe. El resto de acciones sigue proponiendose.
+      - dependency-name: "pnpm/action-setup"
         update-types: ["version-update:semver-major"]
     groups:
       acciones:
