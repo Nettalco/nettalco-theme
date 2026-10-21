@@ -1,0 +1,27 @@
+version: 2
+updates:
+  # Patch y minor en un solo PR (grupo "menores"); cada major va aparte.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: America/Lima
+    open-pull-requests-limit: 5
+    groups:
+      menores:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+      time: "07:00"
+      timezone: America/Lima
+    groups:
+      acciones:
+        patterns:
+          - "*"
