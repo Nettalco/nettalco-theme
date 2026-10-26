@@ -1,12 +1,12 @@
 name: Auditoria de dependencias
 
-# Cada lunes 07:00 (America/Lima): audita lo que se publica. Si el aviso se arregla dentro de
+# Cada lunes 07:17 (America/Lima; no en punto: GitHub suelta muchos cron a esa hora): audita lo que se publica. Si el aviso se arregla dentro de
 # los rangos y build y tests pasan, abre (o actualiza) un PR y termina en verde, porque el PR ya
 # avisa. Si no se puede arreglar solo, falla para que GitHub avise del workflow fallido.
 
 on:
   schedule:
-    - cron: "0 12 * * 1"
+    - cron: "17 12 * * 1"
   workflow_dispatch:
 
 permissions:
